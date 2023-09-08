@@ -1,0 +1,72 @@
+{
+	"folders": [
+		{
+			"name": "✨ mono",
+			"path": "."
+		},
+		{
+			"name": "📦 common",
+			"path": "packages/common"
+		},
+		{
+			"name": "📦 nestjs",
+			"path": "packages/nestjs"
+		},
+		{
+			"name": "📦 playwright",
+			"path": "packages/playwright"
+		},
+		{
+			"name": "📦 sveltekit",
+			"path": "packages/sveltekit"
+		}
+	],
+	"settings": {
+		"workbench.tree.indent": 15,
+		"workbench.tree.renderIndentGuides": "always",
+		"ColorfulMonorepo.workspaces.collection": [
+			{
+				"path": "/Users/jeremyzaborowski/Programming/mono",
+				"packageName": "mono",
+				"label": "🌱  mono",
+				"foreground": "#ffffff",
+				"background": "#cc39bc"
+			},
+			{
+				"path": "/Users/jeremyzaborowski/Programming/mono/packages/common",
+				"packageName": "common",
+				"label": "🍀  common",
+				"foreground": "#ffffff",
+				"background": "#6b2bd8"
+			},
+			{
+				"path": "/Users/jeremyzaborowski/Programming/mono/packages/nestjs",
+				"packageName": "nestjs",
+				"label": "🍀  nestjs",
+				"foreground": "#ffffff",
+				"background": "#9751d3"
+			},
+			{
+				"path": "/Users/jeremyzaborowski/Programming/mono/packages/playwright",
+				"packageName": "playwright",
+				"label": "🍀  playwright",
+				"foreground": "#ffffff",
+				"background": "#5f182c"
+			},
+			{
+				"path": "/Users/jeremyzaborowski/Programming/mono/packages/sveltekit",
+				"packageName": "sveltekit",
+				"label": "🍀  sveltekit",
+				"foreground": "#ffffff",
+				"background": "#db39df"
+			}
+		],
+		"workbench.colorCustomizations": {
+			"statusBar.background": "#6b2bd8",
+			"statusBar.foreground": "#ffffff",
+			"tab.activeBorder": "#6b2bd8",
+			"sideBarTitle.foreground": "#6b2bd8"
+		},
+		"monorepoWorkspace.folders.custom": []
+	}
+}

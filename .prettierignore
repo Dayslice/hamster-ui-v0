@@ -1,0 +1,18 @@
+# Add files here to ignore them from prettier formatting
+/packages/**/node_modules
+node_modules
+packages/**/build
+packages/**/.svelte-kit
+/coverage
+
+# Ignore files for PNPM, NPM and YARN
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+#Ignore Env viles
+.env
+.env.*
+!.env.example
+packages/**/.env
+packages/**/.env.*

@@ -1,0 +1,12 @@
+{
+  "name": "nestjs-sveltekit-playwright-mono",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "pnpm --filter nestjs run start:dev && pnpm --filter sveltekit run dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

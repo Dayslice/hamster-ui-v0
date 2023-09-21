@@ -1,0 +1,73 @@
+{
+	"folders": [
+		{
+			"name": "🌱  nestjs-sveltekit-playwright-mono",
+			"path": "../.."
+		},
+		{
+			"name": "🍀  common",
+			"path": "../common"
+		},
+		{
+			"name": "🍀  nestjs",
+			"path": "."
+		},
+		{
+			"name": "🍀  playwright",
+			"path": "../playwright"
+		},
+		{
+			"name": "🍀  sveltekit",
+			"path": "../sveltekit"
+		}
+	],
+	"settings": {
+		"ColorfulMonorepo.workspaces.collection": [
+			{
+				"path": "/Users/jeremyzaborowski/Programming/nestjs-sveltekit-mono",
+				"packageName": "nestjs-sveltekit-playwright-mono",
+				"label": "🌱  nestjs-sveltekit-playwright-mono",
+				"foreground": "#ffffff",
+				"background": "#2d900b"
+			},
+			{
+				"path": "/Users/jeremyzaborowski/Programming/nestjs-sveltekit-mono/packages/common",
+				"packageName": "common",
+				"label": "🍀  common",
+				"foreground": "#ffffff",
+				"background": "#cf1362"
+			},
+			{
+				"path": "/Users/jeremyzaborowski/Programming/nestjs-sveltekit-mono/packages/nestjs",
+				"packageName": "nestjs",
+				"label": "🍀  nestjs",
+				"foreground": "#ffffff",
+				"background": "#e224eb"
+			},
+			{
+				"path": "/Users/jeremyzaborowski/Programming/nestjs-sveltekit-mono/packages/playwright",
+				"packageName": "playwright",
+				"label": "🍀  playwright",
+				"foreground": "#000000",
+				"background": "#cab90d"
+			},
+			{
+				"path": "/Users/jeremyzaborowski/Programming/nestjs-sveltekit-mono/packages/sveltekit",
+				"packageName": "sveltekit",
+				"label": "🍀  sveltekit",
+				"foreground": "#000000",
+				"background": "#a5aa58"
+			}
+		],
+		"workbench.colorCustomizations": {
+			"titleBar.activeBackground": "#D43830",
+			"titleBar.activeForeground": "#fff",
+			"titleBar.inactiveBackground": "#D43830",
+			"titleBar.inactiveForeground": "#fff",
+			"statusBar.background": "#e224eb",
+			"statusBar.foreground": "#ffffff",
+			"tab.activeBorder": "#e224eb",
+			"sideBarTitle.foreground": "#e224eb"
+		}
+	}
+}

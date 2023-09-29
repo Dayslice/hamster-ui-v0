@@ -40,9 +40,9 @@
   }
 
   const highlightTypes: Array<HighlightType> = [
-    { name: 'Dispute', action: 'dispute', color: 'red' },
-    { name: 'Focus', action: 'focus', color: 'yellow' },
-    { name: 'Snapshot', action: 'snapshot', color: 'green' },
+    { name: 'Ignore', action: 'ignore', color: 'red', icon: 'fa-solid fa-triangle-exclamation' },
+    { name: 'Focus', action: 'focus', color: 'green', icon: 'fa-solid fa-star' },
+    { name: 'Bookmark', action: 'bookmark', color: 'blue', icon: 'fa-solid fa-bookmark' },
   ];
 
   let theme = 'monday'; // can be "notion", "medium", or "slack"
@@ -73,7 +73,7 @@
           <div class="font-semibold">
             {message.speaker || 'Colleen'} <span class="text-gray-500 text-xs">{formatDateZuluToLocal(message.timestamp)}</span>
           </div>
-          <div class="markdown-body text-sm">
+          <div class="markdown-body text-sm" use:highlightMenu={{ types: highlightTypes }} on:highlight={handleHighlight}>
             <SvelteMarkdown options={{ breaks: true }} source={message.content} />
           </div>
           {#each message.attachments as attachment}

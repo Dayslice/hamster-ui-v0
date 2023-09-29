@@ -2,7 +2,6 @@
 import path from 'path';
 import fs from 'fs';
 import { error, json } from '@sveltejs/kit';
-
 /**
  * GET /logs
  */

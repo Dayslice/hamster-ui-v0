@@ -115,6 +115,9 @@ importers:
 
   packages/sveltekit:
     dependencies:
+      dotenv:
+        specifier: ^16.3.1
+        version: 16.3.1
       luxon:
         specifier: ^3.4.3
         version: 3.4.3

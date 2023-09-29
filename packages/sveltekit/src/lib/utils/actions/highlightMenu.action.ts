@@ -1,14 +1,14 @@
 import { onMount } from 'svelte';
 
-interface HighlightType {
+export interface HighlightType {
   name: string;
   action: string;
   color: string;
 }
 
-interface HighlightMenuOptions {
+export interface HighlightMenuOptions {
   types: HighlightType[];
-  theme: 'monday' | 'notion' | 'medium' | 'slack';
+  theme: string | 'monday' | 'notion' | 'medium' | 'slack';
 }
 
 export function highlightMenu(node: HTMLElement, options: HighlightMenuOptions) {
@@ -18,13 +18,13 @@ export function highlightMenu(node: HTMLElement, options: HighlightMenuOptions) 
   function getMenuWrapperClass() {
     switch (theme) {
       case 'monday':
-        return 'bg-white border border-monday-blue-dark shadow-lg';
+        return 'bg-white border border-blue-800 shadow-lg';
       case 'notion':
         return 'bg-gray-100 border border-gray-300 shadow-sm';
       case 'medium':
         return 'bg-white border border-gray-300 shadow-md';
       case 'slack':
-        return 'bg-white border border-slack-purple-dark shadow-lg';
+        return 'bg-white border border-purple-800 shadow-lg';
       default:
         return '';
     }
@@ -32,6 +32,7 @@ export function highlightMenu(node: HTMLElement, options: HighlightMenuOptions) 
 
   function handleMouseUp(event: MouseEvent) {
     const selection = window.getSelection()?.toString().trim();
+    console.log('hello', selection);
     if (!selection) return;
 
     const range = window.getSelection()?.getRangeAt(0);
@@ -44,7 +45,7 @@ export function highlightMenu(node: HTMLElement, options: HighlightMenuOptions) 
         let styleClass = '';
         switch (theme) {
           case 'monday':
-            styleClass = 'bg-monday-blue text-white font-semibold px-4 py-2 rounded-md hover:bg-monday-blue-dark';
+            styleClass = 'bg-blue-600 text-white font-semibold px-4 py-2 rounded-md hover:bg-blue-800';
             break;
           case 'notion':
             styleClass = 'bg-gray-200 hover:bg-blue-500 text-gray-800 font-light px-3 py-1.5 rounded-sm hover:text-white';
@@ -53,7 +54,7 @@ export function highlightMenu(node: HTMLElement, options: HighlightMenuOptions) 
             styleClass = 'bg-transparent border border-black text-black font-medium px-2 py-1 hover:bg-gray-200';
             break;
           case 'slack':
-            styleClass = 'bg-slack-purple text-white font-bold px-4 py-2 rounded-md hover:bg-slack-purple-dark';
+            styleClass = 'bg-purple-600 text-white font-bold px-4 py-2 rounded-md hover:bg-purple-800';
             break;
         }
         return `<button class="${styleClass} m-2 transition duration-300 ease-in-out" data-action="${type.action}">
@@ -74,11 +75,27 @@ export function highlightMenu(node: HTMLElement, options: HighlightMenuOptions) 
 
     const action = event.target.dataset.action;
     const selection = window.getSelection()?.toString();
+    applyHighlight(event);
     node.dispatchEvent(new CustomEvent('highlight', { detail: { action, selection } }));
     menu.remove();
   }
 
-  onMount(() => {
+  function applyHighlight(event: Event) {
+    const target = event.target as HTMLElement;
+    const selection = window.getSelection();
+    const action = target.getAttribute('data-action');
+
+    if (action && selection && selection.rangeCount) {
+      const range = selection.getRangeAt(0);
+      const span = document.createElement('span');
+      span.classList.add('bg-green-100', 'cursor-pointer'); // Getting the color directly from the clicked button.
+      range.surroundContents(span);
+      selection.removeAllRanges();
+    }
+  }
+
+  const init = () => {
+    console.log('hel');
     node.addEventListener('mouseup', handleMouseUp);
     menu.addEventListener('click', handleMenuClick);
 
@@ -87,5 +104,7 @@ export function highlightMenu(node: HTMLElement, options: HighlightMenuOptions) 
       node.removeEventListener('mouseup', handleMouseUp);
       menu.removeEventListener('click', handleMenuClick);
     };
-  });
+  };
+
+  init();
 }

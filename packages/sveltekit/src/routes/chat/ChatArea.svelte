@@ -3,8 +3,7 @@
   import { onMount } from 'svelte';
   import SvelteMarkdown from 'svelte-markdown';
   import { DateTime } from 'luxon';
-  import { useHighlightMenu } from '$lib/utils/actions/highlightMenu.action';
-
+  import { highlightMenu, type HighlightType } from '$lib/utils/actions/highlightMenu.action';
   let activeChannel = 'SEO Research';
   let messages: any = [];
 
@@ -39,6 +38,20 @@
     const parts = path.split('/');
     return parts[parts.length - 1];
   }
+
+  const highlightTypes: Array<HighlightType> = [
+    { name: 'Dispute', action: 'dispute', color: 'red' },
+    { name: 'Focus', action: 'focus', color: 'yellow' },
+    { name: 'Snapshot', action: 'snapshot', color: 'green' },
+  ];
+
+  let theme = 'monday'; // can be "notion", "medium", or "slack"
+
+  function handleHighlight(event: Event) {
+    // Handle the highlight action and selected text
+    const { action, selection } = (<CustomEvent>event).detail;
+    console.log(`Action: ${action}, Selection: ${selection}`);
+  }
 </script>
 
 <div class="flex-1 flex flex-col">
@@ -60,7 +73,7 @@
           <div class="font-semibold">
             {message.speaker || 'Colleen'} <span class="text-gray-500 text-xs">{formatDateZuluToLocal(message.timestamp)}</span>
           </div>
-          <div class="markdown-body text-sm">
+          <div class="markdown-body text-sm" use:highlightMenu={{ types: highlightTypes, theme: theme }} on:highlight={handleHighlight}>
             <SvelteMarkdown options={{ breaks: true }} source={message.content} />
           </div>
           {#each message.attachments as attachment}
@@ -101,5 +114,4 @@
 </div>
 
 <style>
-  /* Specific styles for the chat area can go here. */
 </style>

@@ -31,6 +31,21 @@ export function highlightMenu(node: HTMLElement, options: HighlightMenuOptions) 
       menu.$destroy();
     }
 
+    if (!isSelectionWithinNode(selection, node)) {
+      // If the selection is outside the node, adjust the range
+      const range = selection.getRangeAt(0);
+      adjustRange(range, node);
+
+      // If the adjusted range is empty, exit the function
+      if (!range.toString().trim()) {
+        return;
+      }
+
+      // Update the selection with the adjusted range
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }
+
     selectedText = selection?.toString().trim();
     const range = window.getSelection()?.getRangeAt(0);
     target = event.target;
@@ -77,11 +92,32 @@ export function highlightMenu(node: HTMLElement, options: HighlightMenuOptions) 
     }
   }
 
+  function adjustRange(range: Range, node: Node) {
+    // If the startContainer is outside the node, set it to the beginning of the node
+    if (!node.contains(range.startContainer)) {
+      range.setStart(node, 0);
+    }
+
+    // If the endContainer is outside the node, set it to the end of the node
+    if (!node.contains(range.endContainer)) {
+      range.setEnd(node, node.childNodes.length);
+    }
+  }
+
+  function isSelectionWithinNode(selection: Selection, node: Node): boolean {
+    const range = selection.getRangeAt(0);
+    return node.contains(range.startContainer) && node.contains(range.endContainer);
+  }
+
   function applyHighlight(type: HighlightType) {
     const selection = window.getSelection();
 
     if (type.action && selection && selection.rangeCount) {
-      const range = selection.getRangeAt(0);
+      const range = selection.getRangeAt(0).cloneRange();
+
+      if (!isSelectionWithinNode(selection, node)) return; // Ensure the selection is within our element
+      adjustRange(range, node);
+
       const span = document.createElement('span');
       span.classList.add(`bg-${type.color}-100`, 'cursor-pointer'); // Getting the color directly from the clicked button.
       range.surroundContents(span);

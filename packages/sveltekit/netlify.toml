@@ -1,6 +1,6 @@
 [build]
   command = "cd packages/sveltekit && pnpm run build"
-  publish = "build/"
+  publish = "packages/sveltekit/build/"
   functions = "packages/sveltekit/.netlify/functions-internal/"
 [[headers]]
   # Define which paths this specific [[headers]] block will cover.

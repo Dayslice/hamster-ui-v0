@@ -1,5 +1,5 @@
 [build]
-  command = "cd packages/sveltekit && pnpm run build"
+  command = "pnpm run build"
   publish = "packages/sveltekit/build/"
   functions = "packages/sveltekit/.netlify/functions-internal/"
 [[headers]]

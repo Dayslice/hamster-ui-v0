@@ -1,6 +1,7 @@
 [build]
   command = "cd packages/sveltekit && pnpm run build"
   publish = "build/"
+  functions = "functions/"
 [[headers]]
   # Define which paths this specific [[headers]] block will cover.
   for = "/*"
@@ -8,3 +9,5 @@
     Access-Control-Allow-Origin = "*"
 [[plugins]]
   package = "netlify-plugin-contextual-env"
+[functions]
+  node_bundler = "esbuild"

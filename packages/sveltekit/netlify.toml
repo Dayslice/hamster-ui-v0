@@ -1,6 +1,6 @@
 [build]
   command = "cd packages/sveltekit && pnpm run build"
-  publish = "packages/sveltekit/build/"
+  publish = "build/"
   functions = "functions/"
 [[headers]]
   # Define which paths this specific [[headers]] block will cover.

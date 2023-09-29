@@ -26,46 +26,50 @@
 		"workbench.tree.renderIndentGuides": "always",
 		"ColorfulMonorepo.workspaces.collection": [
 			{
-				"path": "/Users/jeremyzaborowski/Programming/mono",
-				"packageName": "mono",
-				"label": "🌱  mono",
-				"foreground": "#ffffff",
-				"background": "#cc39bc"
+				"path": "/Users/jeremyzaborowski/Programming/hamster-ui-v0",
+				"packageName": "nestjs-sveltekit-playwright-mono",
+				"label": "🌱  nestjs-sveltekit-playwright-mono",
+				"foreground": "#000000",
+				"background": "#e9ba8e"
 			},
 			{
-				"path": "/Users/jeremyzaborowski/Programming/mono/packages/common",
+				"path": "/Users/jeremyzaborowski/Programming/hamster-ui-v0/packages/common",
 				"packageName": "common",
 				"label": "🍀  common",
 				"foreground": "#ffffff",
-				"background": "#6b2bd8"
+				"background": "#018e5f"
 			},
 			{
-				"path": "/Users/jeremyzaborowski/Programming/mono/packages/nestjs",
+				"path": "/Users/jeremyzaborowski/Programming/hamster-ui-v0/packages/nestjs",
 				"packageName": "nestjs",
 				"label": "🍀  nestjs",
 				"foreground": "#ffffff",
-				"background": "#9751d3"
+				"background": "#943870"
 			},
 			{
-				"path": "/Users/jeremyzaborowski/Programming/mono/packages/playwright",
+				"path": "/Users/jeremyzaborowski/Programming/hamster-ui-v0/packages/playwright",
 				"packageName": "playwright",
 				"label": "🍀  playwright",
 				"foreground": "#ffffff",
-				"background": "#5f182c"
+				"background": "#1bad5f"
 			},
 			{
-				"path": "/Users/jeremyzaborowski/Programming/mono/packages/sveltekit",
+				"path": "/Users/jeremyzaborowski/Programming/hamster-ui-v0/packages/sveltekit",
 				"packageName": "sveltekit",
 				"label": "🍀  sveltekit",
 				"foreground": "#ffffff",
-				"background": "#db39df"
+				"background": "#3e5be7"
 			}
 		],
 		"workbench.colorCustomizations": {
-			"statusBar.background": "#6b2bd8",
+			"titleBar.activeBackground": "#D43830",
+			"titleBar.activeForeground": "#fff",
+			"titleBar.inactiveBackground": "#D43830",
+			"titleBar.inactiveForeground": "#fff",
+			"statusBar.background": "#3e5be7",
 			"statusBar.foreground": "#ffffff",
-			"tab.activeBorder": "#6b2bd8",
-			"sideBarTitle.foreground": "#6b2bd8"
+			"tab.activeBorder": "#3e5be7",
+			"sideBarTitle.foreground": "#3e5be7"
 		},
 		"monorepoWorkspace.folders.custom": []
 	}

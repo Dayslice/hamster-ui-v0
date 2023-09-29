@@ -6,7 +6,7 @@ import { error, json } from '@sveltejs/kit';
  * GET /logs
  */
 export async function GET(_): Promise<{ status: number; body: any }> {
-  const path_string = import.meta.env['NODE_ENV'] == 'development' ? './static' : './';
+  const path_string = './';
   const dir_path = path.resolve(path_string); // Replace this with the actual path you need
   const log_file = path.join(dir_path, 'log.json');
 

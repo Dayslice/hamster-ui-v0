@@ -2,7 +2,8 @@ import type { LogData } from '../../routes/logger/logger.types';
 
 // src/lib/apiUtils.ts
 export async function fetchLogs(): Promise<LogData[]> {
-  const response = await fetch('http://127.0.0.1:5000/logs');
+  console.info(import.meta.env['VITE_BASE_URL']);
+  const response = await fetch(`${import.meta.env['VITE_BASE_URL']}/logs`);
   if (!response.ok) {
     throw new Error(`HTTP error! Status: ${response.status}`);
   }

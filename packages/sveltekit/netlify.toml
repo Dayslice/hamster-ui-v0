@@ -1,5 +1,5 @@
 [build]
-  command = "cd packages/svelitekit && pnpm run build"
+  command = "cd packages/sveltekit && pnpm run build"
   publish = "packages/sveltekit/build/"
   functions = "functions/"
 [[headers]]

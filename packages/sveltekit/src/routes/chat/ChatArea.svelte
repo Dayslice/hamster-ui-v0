@@ -73,7 +73,7 @@
           <div class="font-semibold">
             {message.speaker || 'Colleen'} <span class="text-gray-500 text-xs">{formatDateZuluToLocal(message.timestamp)}</span>
           </div>
-          <div class="markdown-body text-sm" use:highlightMenu={{ types: highlightTypes, theme: theme }} on:highlight={handleHighlight}>
+          <div class="markdown-body text-sm">
             <SvelteMarkdown options={{ breaks: true }} source={message.content} />
           </div>
           {#each message.attachments as attachment}

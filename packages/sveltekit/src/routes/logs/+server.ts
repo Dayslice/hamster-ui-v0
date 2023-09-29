@@ -2,7 +2,7 @@
 import path from 'path';
 import fs from 'fs';
 import { error, json } from '@sveltejs/kit';
-import { logs } from '$lib/utils/fake_db.js';
+import logs from './log.json';
 /**
  * GET /logs
  */
@@ -16,12 +16,7 @@ export async function GET(_): Promise<{ status: number; body: any }> {
   try {
     //const fileData = fs.readFileSync(log_file, 'utf-8');
     const fileData = logs;
-    fileData.split('\n').forEach((line) => {
-      if (line.trim()) {
-        log_entries.push(JSON.parse(line));
-      }
-    });
-    return json(log_entries);
+    return json(fileData);
   } catch (e: any) {
     console.error(e);
     throw error(500, 'problem reading file. try again later.');

@@ -6,7 +6,7 @@ export default defineConfig({
   root: 'packages/sveltekit',
   publicDir: 'packages/sveltekit/static',
   server: {
-    port: 3000,
+    port: 3002,
     host: '0.0.0.0',
   },
 });

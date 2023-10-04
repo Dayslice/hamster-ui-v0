@@ -1,6 +1,7 @@
 <script lang="ts">
   import Panel from '$lib/layout/Panel.svelte';
   import { formatCasualDateTime } from '$lib/utils/formatters/date.formatter';
+  import SvelteMarkdown from 'svelte-markdown';
 
   // Placeholder data for chat logs.
   export let logs: any[] = [];
@@ -15,7 +16,9 @@
           <div class="text-gray-500 mb-1">
             {log.source_agent?.name || 'System'} • <span class="text-slate-400 text-xs">{formatCasualDateTime(log.created_at)}</span>
           </div>
-          <div class="bg-gray-100 p-2 rounded-lg">{log.content}</div>
+          <div class="bg-gray-100 p-2 rounded-lg">
+            <SvelteMarkdown options={{ breaks: true }} source={log.content} />
+          </div>
         </div>
       </div>
     {/each}

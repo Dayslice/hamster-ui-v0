@@ -19,7 +19,7 @@ import { WorkflowService } from './workflow.service';
     },
   },
   routes: {
-    only: ['getOneBase', 'getManyBase', 'updateOneBase'],
+    only: ['getOneBase', 'getManyBase', 'updateOneBase', 'createOneBase'],
   },
 })
 @Controller('workflow')

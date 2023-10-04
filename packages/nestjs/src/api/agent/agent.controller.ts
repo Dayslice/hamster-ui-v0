@@ -19,7 +19,7 @@ import { AgentService } from './agent.service';
     },
   },
   routes: {
-    only: ['getOneBase', 'getManyBase', 'updateOneBase'],
+    only: ['getOneBase', 'getManyBase', 'updateOneBase', 'createOneBase'],
   },
 })
 @Controller('agent')

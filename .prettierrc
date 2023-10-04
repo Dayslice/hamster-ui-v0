@@ -1,6 +1,7 @@
 {
 	"singleQuote": true,
 	"trailingComma": "all",
+	"endOfLine": "lf",
 	"printWidth": 140,
 	"plugins": ["prettier-plugin-svelte"],
 	"pluginSearchDirs": [".", "./packages/sveltekit"],

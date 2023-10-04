@@ -1,13 +1,41 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './user-entity/user.entity';
-import { Circle } from './circle-entity/circle.entity';
-import { CircleEntityService } from './circle-entity/circle-entity.service';
-import { UserEntityService } from './user-entity/user-entity.service';
+import { User, UserEntityService } from './user.entity';
+import { Attachment, AttachmentEntityService } from './attachment.entity';
+import { Agent, AgentEntityService } from './agent.entity';
+import { Company, CompanyEntityService } from './company.entity';
+import { Log, LogEntityService } from './log.entity';
+import { Run, RunEntityService } from './run.entity';
+import { Step, StepEntityService } from './step.entity';
+import { Style, StyleEntityService } from './style.entity';
+import { Tool, ToolEntityService } from './tool.entity';
+import { Workflow, WorkflowEntityService } from './workflow.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User, Circle])],
-  providers: [CircleEntityService, UserEntityService],
-  exports: [CircleEntityService, UserEntityService],
+  imports: [TypeOrmModule.forFeature([Agent, Attachment, Company, Log, Run, Step, Style, Tool, User, Workflow])],
+  providers: [
+    AgentEntityService,
+    AttachmentEntityService,
+    CompanyEntityService,
+    LogEntityService,
+    RunEntityService,
+    StepEntityService,
+    StyleEntityService,
+    ToolEntityService,
+    UserEntityService,
+    WorkflowEntityService,
+  ],
+  exports: [
+    AgentEntityService,
+    AttachmentEntityService,
+    CompanyEntityService,
+    LogEntityService,
+    RunEntityService,
+    StepEntityService,
+    StyleEntityService,
+    ToolEntityService,
+    UserEntityService,
+    WorkflowEntityService,
+  ],
 })
 export class EntitiesModule {}

@@ -29,6 +29,8 @@
     "@nestjs/core": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/typeorm": "^10.0.0",
+    "@nestjsx/crud": "5.0.0-alpha.3",
+    "@nestjsx/crud-typeorm": "5.0.0-alpha.3",
     "common": "workspace:*",
     "dotenv": "^16.3.1",
     "pg": "^8.11.3",

@@ -4,11 +4,17 @@ export default {
   darkMode: 'class',
   content: ['./src/**/*.{html,js,svelte,ts}'],
   theme: {
-    extend: {fontSize: {
-      'xxs': '0.7rem'
-    },  fontFamily: {
-      'sans': ['Inter', 'sans-serif'],
-    },},
+    extend: {
+      fontSize: {
+        'xxs': '0.7rem'
+      },  
+      fontFamily: {
+        'sans': ['Inter', 'sans-serif'],
+      },
+      boxShadow: {
+        'shallow': '0 1px .625rem 0 hsla(210, 7%, 22%, .06), 0 .125rem .25rem 0 hsla(210, 7%, 22%, .08)',
+      }
+    },
     
   },
   plugins: [],

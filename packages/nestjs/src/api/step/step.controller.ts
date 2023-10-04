@@ -25,7 +25,7 @@ import { StepService } from './step.service';
     },
   },
   routes: {
-    only: ['getOneBase', 'getManyBase', 'updateOneBase'],
+    only: ['getOneBase', 'getManyBase', 'updateOneBase', 'createOneBase'],
   },
 })
 @Controller('step')

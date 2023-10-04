@@ -16,6 +16,12 @@ import { StepService } from './step.service';
       primary_agent: {},
       other_agents: {},
     },
+    sort: [
+      {
+        field: 'order',
+        order: 'ASC',
+      },
+    ],
   },
   params: {
     id: {

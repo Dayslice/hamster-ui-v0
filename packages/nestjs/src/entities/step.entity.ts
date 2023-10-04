@@ -14,6 +14,9 @@ export class Step extends Base {
   @Column()
   description: string;
 
+  @Column({ default: 0 })
+  order: number;
+
   @ManyToOne(() => Agent)
   @JoinColumn({ name: 'primary_agent_id' })
   primary_agent: Agent;

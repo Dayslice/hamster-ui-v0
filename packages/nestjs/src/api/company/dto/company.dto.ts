@@ -1,6 +1,4 @@
 // company.dto.ts
-
-import { IsOptional, IsString } from 'class-validator';
 import { FormField } from 'src/decorators/formField.decorator';
 
 export class CreateCompanyDto {

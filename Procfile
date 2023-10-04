@@ -1,3 +1,1 @@
-web: cd packages/nestjs
-web: pnpm run build
-web: pnpm run start:prod
+web: pnpm run prod-frontend

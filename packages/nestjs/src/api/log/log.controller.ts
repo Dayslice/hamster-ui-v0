@@ -23,6 +23,12 @@ import { LogService } from './log.service';
       source_agent: {},
       target_agent: {},
     },
+    sort: [
+      {
+        field: 'created_at',
+        order: 'ASC',
+      },
+    ],
   },
   routes: {
     only: ['getOneBase', 'getManyBase', 'updateOneBase', 'createOneBase'],

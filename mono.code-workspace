@@ -66,10 +66,10 @@
 			"titleBar.activeForeground": "#fff",
 			"titleBar.inactiveBackground": "#D43830",
 			"titleBar.inactiveForeground": "#fff",
-			"statusBar.background": "#3e5be7",
-			"statusBar.foreground": "#ffffff",
-			"tab.activeBorder": "#3e5be7",
-			"sideBarTitle.foreground": "#3e5be7"
+			"statusBar.background": "#e9ba8e",
+			"statusBar.foreground": "#000000",
+			"tab.activeBorder": "#e9ba8e",
+			"sideBarTitle.foreground": "#e9ba8e"
 		},
 		"monorepoWorkspace.folders.custom": []
 	}

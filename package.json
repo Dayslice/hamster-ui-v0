@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "pnpm --filter nestjs run start:dev && pnpm --filter sveltekit run dev"
+    "dev": "pnpm --filter nestjs run start:dev && pnpm --filter sveltekit run dev",
+    "prod-frontend": "pnpm --filter nestjs run build && pnpm --filter nestjs run start:prod"
   },
   "keywords": [],
   "author": "",

@@ -1,4 +1,8 @@
 .markdown-body {
+  all: revert; /* locally remove tailwind styles */
+}
+
+.markdown-body {
   color-scheme: dark;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
@@ -313,6 +317,7 @@
   margin-top: 0;
   margin-bottom: 0;
   padding-left: 2em;
+  list-style: auto;
 }
 
 .markdown-body ol ol,

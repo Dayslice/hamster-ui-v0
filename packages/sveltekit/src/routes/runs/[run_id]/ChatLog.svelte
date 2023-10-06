@@ -16,8 +16,8 @@
           <div class="text-gray-500 mb-1">
             {log.source_agent?.name || 'System'} • <span class="text-slate-400 text-xs">{formatCasualDateTime(log.created_at)}</span>
           </div>
-          <div class="bg-gray-100 p-2 rounded-lg">
-            <SvelteMarkdown options={{ breaks: true }} source={log.content} />
+          <div class="bg-gray-100 p-2 rounded-lg text-sm leading-relaxed whitespace-pre-wrap markdown-body">
+            <SvelteMarkdown source={log.content} />
           </div>
         </div>
       </div>

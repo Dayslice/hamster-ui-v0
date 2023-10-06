@@ -12,13 +12,10 @@
   </div>
   <ul class="mt-8 space-y-3">
     <li class="px-6 py-2 hover:bg-gray-700">
-      <a href="#">Runs</a>
+      <a href="/company">Companies</a>
     </li>
     <li class="px-6 py-2 hover:bg-gray-700">
-      <a href="#">Workflows</a>
-    </li>
-    <li class="px-6 py-2 hover:bg-gray-700">
-      <a href="#">Agent Directory</a>
+      <a href="/workflows" class="w-full">Workflows</a>
     </li>
     <!-- Add more items as needed -->
   </ul>

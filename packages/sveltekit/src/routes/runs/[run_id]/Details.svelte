@@ -26,6 +26,9 @@
         <div class="flex flex-row gap-1 items-center">
           <i class="fa-solid fa-clock" />
           {formatDuration(run.created_at, run.updated_at)}
+          {#if run.status == 'running'}
+            so far
+          {/if}
         </div>
       </div>
     </div>

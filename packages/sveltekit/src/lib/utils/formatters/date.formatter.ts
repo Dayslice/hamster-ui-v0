@@ -20,9 +20,9 @@ export function formatDuration(iso_start: string, iso_end: string): string {
 
   const diff = end.diff(start, ['hours', 'minutes']);
   const hours = Math.floor(diff.hours);
-  const minutes = diff.minutes + 3;
+  const minutes = diff.minutes;
   if (hours > 0) {
-    return `${hours} hour(s) and ${minutes} minute(s)`;
+    return `${hours} hours and ${minutes} minutes`;
   }
-  return `${minutes} minute(s)`;
+  return `${minutes} minutes`;
 }

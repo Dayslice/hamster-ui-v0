@@ -28,11 +28,11 @@ export class Step extends Base {
   @Column()
   workflow_id: string;
 
-  @ManyToOne(() => Workflow)
+  @ManyToOne(() => Workflow, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
   @JoinColumn({ name: 'workflow_id' })
   workflow: Workflow;
 
-  @ManyToMany(() => Agent)
+  @ManyToMany(() => Agent, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
   @JoinTable({
     name: 'step_other_agents', // Name of the join table
     joinColumn: {

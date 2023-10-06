@@ -12,14 +12,14 @@ export class Run extends Base {
   @Column()
   workflow_id: string;
 
-  @ManyToOne(() => Workflow)
+  @ManyToOne(() => Workflow, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
   @JoinColumn({ name: 'workflow_id' })
   workflow: Workflow;
 
   @Column()
   company_id: string;
 
-  @ManyToOne(() => Company, (company) => company.runs)
+  @ManyToOne(() => Company, (company) => company.runs, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
   @JoinColumn({ name: 'company_id' })
   company: Company;
 

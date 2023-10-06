@@ -25,21 +25,27 @@ export class Log extends Base {
   @Column()
   run_id: string;
 
-  @ManyToOne(() => Run, (run) => run.logs)
+  @ManyToOne(() => Run, (run) => run.logs, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   @JoinColumn({ name: 'run_id' })
   run: Run;
 
   @Column({ nullable: true })
   source_agent_id: string;
 
-  @ManyToOne(() => Agent)
+  @ManyToOne(() => Agent, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   @JoinColumn({ name: 'source_agent_id' })
   source_agent: Agent;
 
   @Column({ nullable: true })
   target_agent_id: string;
 
-  @ManyToOne(() => Agent, { nullable: true })
+  @ManyToOne(() => Agent, { nullable: true, onDelete: 'SET NULL', onUpdate: 'SET NULL' })
   @JoinColumn({ name: 'target_agent_id' })
   target_agent: Agent;
 }

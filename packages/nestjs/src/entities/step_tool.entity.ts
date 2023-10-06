@@ -14,11 +14,11 @@ export class StepTool extends Base {
   @Column()
   step_id: string;
 
-  @ManyToOne(() => Step, (step) => step.step_tools)
+  @ManyToOne(() => Step, (step) => step.step_tools, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
   @JoinColumn({ name: 'step_id' })
   step: Step;
 
-  @ManyToOne(() => Tool, (tool) => tool.step_tools)
+  @ManyToOne(() => Tool, (tool) => tool.step_tools, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
   @JoinColumn({ name: 'tool_id' })
   tool: Tool;
 
@@ -28,7 +28,7 @@ export class StepTool extends Base {
   @Column({ default: 0 })
   order: number;
 
-  @ManyToMany(() => StepTool)
+  @ManyToMany(() => StepTool, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
   @JoinTable({
     name: 'step_tool_inputs', // Name of the join table
     joinColumn: {

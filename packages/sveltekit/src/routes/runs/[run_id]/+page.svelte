@@ -44,15 +44,12 @@
   }
 </script>
 
-<LeftNav />
-<Content>
-  {#if run && workflow && logs && steps}
-    <main class="grid gap-4 grid-cols-4 p-4 auto-rows-max">
-      <Details {workflow} {run} />
-      <StepsOverview {steps} />
-      <Task {workflow} {run} />
-      <Agents {steps} />
-      <ChatLog {logs} />
-    </main>
-  {/if}
-</Content>
+{#if run && workflow && logs && steps}
+  <main class="grid gap-4 grid-cols-4 p-4 auto-rows-max">
+    <Details {workflow} {run} />
+    <StepsOverview {steps} />
+    <Task {workflow} {run} />
+    <Agents {steps} />
+    <ChatLog {logs} />
+  </main>
+{/if}

@@ -1,4 +1,4 @@
-import { Entity, Column, Repository, ManyToMany, JoinTable, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, Repository, ManyToMany, JoinTable, ManyToOne, JoinColumn, DeepPartial } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Base } from './base.entity';
@@ -49,5 +49,9 @@ export class StepToolEntityService extends TypeOrmCrudService<StepTool> {
     repo: Repository<StepTool>,
   ) {
     super(repo);
+  }
+
+  async save(entity: DeepPartial<StepTool>) {
+    return this.repo.save(entity);
   }
 }

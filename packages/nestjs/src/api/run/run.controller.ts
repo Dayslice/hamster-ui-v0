@@ -22,6 +22,12 @@ import { Run, RunEntityService } from 'src/entities/run.entity';
     join: {
       workflow: {},
     },
+    sort: [
+      {
+        field: 'created_at',
+        order: 'DESC',
+      },
+    ],
   },
   routes: {
     only: ['getOneBase', 'getManyBase', 'updateOneBase', 'createOneBase'],

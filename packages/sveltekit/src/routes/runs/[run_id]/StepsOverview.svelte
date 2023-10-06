@@ -1,5 +1,6 @@
 <script lang="ts">
   import Panel from '$lib/layout/Panel.svelte';
+  import AgentMini from '$lib/ui/AgentMini.svelte';
 
   // Example steps data. This would be fetched or passed as props.
   export let steps: any[] = [];
@@ -18,14 +19,7 @@
           </div>
 
           <!-- Involved Agents -->
-          <div class="flex -space-x-2">
-            <img src={step.primary_agent.avatar_url} alt={step.primary_agent.name} class="w-6 h-6 rounded-full" />
-            {#if step.other_agents}
-              {#each step.other_agents as agent}
-                <img src={agent.avatar_url} alt={agent.name} class="w-6 h-6 rounded-full" />
-              {/each}
-            {/if}
-          </div>
+          <AgentMini primary_agent={step.primary_agent} other_agents={step.other_agents} />
         </li>
       {/each}
     </ul>

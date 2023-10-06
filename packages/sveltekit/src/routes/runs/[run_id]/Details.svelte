@@ -1,6 +1,7 @@
 <script lang="ts">
   import { updated } from '$app/stores';
   import Panel from '$lib/layout/Panel.svelte';
+  import Status from '$lib/ui/Status.svelte';
   import { formatCasualDateTime, formatDuration } from '$lib/utils/formatters/date.formatter';
 
   export let workflow: any;
@@ -15,7 +16,7 @@
       <div class="flex flex-row items-center gap-3">
         <span class="font-medium text-xl"><span class="text-slate-800">{workflow ? workflow.label : ''}</span></span>
         <span class="text-xs bg-slate-200 text-slate-600 px-2 py-0.5 rounded-xl font-semibold">id: {run.id.slice(-4)}</span>
-        <span class="text-xs bg-emerald-200 text-emerald-700 px-2 py-0.5 rounded-xl font-semibold">done</span>
+        <Status status={run.status} />
       </div>
       <div class="flex flex-row items-center gap-3 text-sm text-slate-400">
         <div class="flex flex-row gap-1 items-center">

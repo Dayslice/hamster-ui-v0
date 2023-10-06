@@ -7,6 +7,7 @@
   import Content from '$lib/layout/Content.svelte';
   import { formatCasualDateTime } from '$lib/utils/formatters/date.formatter';
   import { goto } from '$app/navigation';
+  import Status from '$lib/ui/Status.svelte';
   let company_id: string = $page.params.company_id;
   let company: any;
   let runs: any[] = [];
@@ -38,9 +39,7 @@
             <td class="py-4 px-3 text-sm font-medium text-gray-900 sm:pl-0">{run.id.slice(-4)}</td>
             <td class="px-3 py-4 text-sm text-gray-500">{run.workflow.label}</td>
             <td class="px-3 py-4 text-sm text-gray-500">{formatCasualDateTime(run.created_at)}</td>
-            <td class="relative py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0"
-              ><span class="text-xs bg-emerald-200 text-emerald-700 px-2 py-0.5 rounded-xl font-semibold">done</span></td
-            >
+            <td class="relative py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0"><Status status={run.status} /> </td>
           </tr>
         {/each}
       </tbody>

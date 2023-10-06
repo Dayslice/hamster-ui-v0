@@ -47,7 +47,7 @@
   $: agents = getUniqueAgents(steps);
 </script>
 
-<Panel header="Workflow Roster">
+<Panel header="Workflow Roster" class="col-span-1 row-span-3">
   <ul>
     {#each agents as agent}
       <li class="flex flex-col gap-2 items-left last:mb-0 px-4 first:pt-0 py-4 border-b border-b slate-50 last:border-b-0">

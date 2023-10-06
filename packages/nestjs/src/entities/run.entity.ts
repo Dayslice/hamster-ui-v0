@@ -26,6 +26,9 @@ export class Run extends Base {
   @Column()
   version: number;
 
+  @Column({ default: 'done' })
+  status: 'running' | 'failed' | 'cancelled' | 'done';
+
   @OneToMany(() => Log, (log) => log.run)
   logs: Log[];
 }

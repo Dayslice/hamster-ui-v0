@@ -5,7 +5,7 @@
   export let steps: any[] = [];
 </script>
 
-<Panel header="Step Overview">
+<Panel header="Step Overview" class="col-span-1 row-span-2">
   {#if steps}
     <ul>
       {#each steps as step}

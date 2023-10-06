@@ -2,7 +2,6 @@ import { Entity, Column, Repository, ManyToMany, JoinTable, ManyToOne, JoinColum
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Base } from './base.entity';
-import { Agent } from './agent.entity';
 import { Step } from './step.entity';
 import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
 
@@ -13,6 +12,9 @@ export class Workflow extends Base {
 
   @Column()
   description: string;
+
+  @Column({ default: null, nullable: true })
+  task: string;
 
   @OneToMany(() => Step, (step) => step.workflow)
   steps: Step[];

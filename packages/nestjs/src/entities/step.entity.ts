@@ -1,10 +1,11 @@
-import { Entity, Column, Repository, ManyToMany, JoinTable, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, Repository, ManyToMany, JoinTable, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Base } from './base.entity';
 import { Agent } from './agent.entity';
 import { Workflow } from './workflow.entity';
 import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
+import { StepTool } from './step_tool.entity';
 
 @Entity()
 export class Step extends Base {
@@ -44,6 +45,9 @@ export class Step extends Base {
     },
   })
   other_agents: Agent[];
+
+  @OneToMany(() => StepTool, (step_tool) => step_tool.step)
+  step_tools: StepTool[];
 }
 @Injectable()
 export class StepEntityService extends TypeOrmCrudService<Step> {

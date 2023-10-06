@@ -6,18 +6,16 @@ import { Controller, Get, Param } from '@nestjs/common';
 import { Crud } from '@nestjsx/crud';
 import { Step, StepEntityService } from 'src/entities/step.entity';
 import { StepService } from './step.service';
+import { StepTool, StepToolEntityService } from 'src/entities/step_tool.entity';
 
 @Crud({
   model: {
-    type: Step,
+    type: StepTool,
   },
   query: {
     join: {
-      primary_agent: {},
-      other_agents: {},
-      step_tools: {},
-      'step_tools.step_tool_inputs': {},
-      'step_tools.tool': {},
+      step_tool_inputs: {},
+      tool: {},
     },
     sort: [
       {
@@ -37,12 +35,7 @@ import { StepService } from './step.service';
     only: ['getOneBase', 'getManyBase', 'updateOneBase', 'createOneBase'],
   },
 })
-@Controller('step')
-export class StepController {
-  constructor(public service: StepEntityService, private logic: StepService) {}
-
-  @Get('/:id/step-tools/:stepToolId/inputs')
-  async getStepToolInputs(@Param('id') stepId: string, @Param('stepToolId') stepToolId: string) {
-    return await this.logic.findStepToolInputs(stepId, stepToolId);
-  }
+@Controller('step-tool')
+export class StepToolController {
+  constructor(public service: StepToolEntityService, private logic: StepService) {}
 }

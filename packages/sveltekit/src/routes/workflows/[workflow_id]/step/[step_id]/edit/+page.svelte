@@ -73,7 +73,7 @@
   function selectStepTool(stepTool: StepTool) {
     selectedStepTool = { ...stepTool };
     newStepTool = { ...stepTool };
-    configJson.json = newStepTool.config as {};
+    configJson = { ...configJson, json: { ...newStepTool.config } };
   }
 
   async function createOrUpdateStepTool() {
@@ -112,6 +112,13 @@
       configJson = { ...configJson, json: {} };
     }
   }
+
+  function reset() {
+    selectedStepTool = null;
+    newStepTool = initializeStepTool();
+    configJson = { ...configJson, json: {} };
+  }
+
   async function moveOrder(index: number, direction: number) {
     // Swap the order of the two items based on the direction
     const itemToMove = stepTools[index];
@@ -208,8 +215,7 @@
               type="button"
               class="text-red-500 hover:text-red-600"
               on:click={() => {
-                selectedStepTool = null;
-                newStepTool = initializeStepTool();
+                reset();
               }}>Cancel Edit</button
             >
           {/if}
@@ -218,13 +224,3 @@
     </div>
   {/if}
 </div>
-
-<style>
-  [draggable] {
-    cursor: move;
-  }
-
-  [dragged] {
-    opacity: 0.5;
-  }
-</style>

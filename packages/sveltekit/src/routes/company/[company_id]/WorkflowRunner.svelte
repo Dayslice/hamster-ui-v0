@@ -21,8 +21,8 @@
   async function runWorkflow() {
     if (selectedWorkflowId) {
       try {
-        const run: Run = await workflowService.run(selectedWorkflowId, companyId);
-        goto(`/runs/${run.id}`);
+        workflowService.run(selectedWorkflowId, companyId);
+        goto(`/company/${companyId}`);
       } catch (error) {
         console.error('Error running workflow:', error);
         alert('Failed to start the workflow.');

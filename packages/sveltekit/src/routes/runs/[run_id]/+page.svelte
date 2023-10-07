@@ -6,14 +6,20 @@
   import Agents from './Agents.svelte';
   import StepsOverview from './StepsOverview.svelte';
   import ChatLog from './ChatLog.svelte';
-  import LeftNav from '$lib/layout/LeftNav.svelte';
-  import Content from '$lib/layout/Content.svelte';
   import Task from './Task.svelte';
+  import type { Log } from '$entities/log.entity';
+  import type { Workflow } from '$entities/workflow.entity';
+  import type { Run } from '$entities/run.entity';
+  import type { Step } from '$entities/step.entity';
+  import runService from '$lib/utils/api/runService';
+  import workflowService from '$lib/utils/api/workflowService';
+  import logService from '$lib/utils/api/logService';
+  import stepService from '$lib/utils/api/stepService';
   let run_id = $page.params.run_id;
-  let run: any;
-  let workflow: any;
-  let logs: any[];
-  let steps: any[];
+  let run: Run;
+  let workflow: Workflow;
+  let logs: Log[] = [];
+  let steps: Step[];
   let interval_id: number | NodeJS.Timer;
 
   onMount(async () => {
@@ -33,12 +39,16 @@
   });
 
   async function fetchData() {
-    run = await fetchRun(run_id);
+    run = await runService.getOne(run_id);
     if (run) {
-      workflow = await fetchWorkflow(run.workflow_id);
-      logs = await fetchLogs(run_id);
+      workflow = await workflowService.getOne(run.workflow_id);
+      logs = await logService.getMany([
+        ['filter', `run_id||$eq||${run_id}`],
+        ['join', 'source_agent'],
+        ['join', 'attachments'],
+      ]);
       if (workflow) {
-        steps = await fetchSteps(workflow.id);
+        steps = await stepService.getManyForWorkflow(workflow.id);
       }
     }
   }

@@ -19,7 +19,7 @@ import { AttachmentService } from './attachment.service';
     },
   },
   routes: {
-    only: ['getOneBase', 'getManyBase', 'updateOneBase'],
+    only: ['getOneBase', 'getManyBase', 'updateOneBase', 'createOneBase'],
   },
 })
 @Controller('attachment')

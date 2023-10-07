@@ -17,7 +17,7 @@ async function update(id: string, data: Partial<Workflow>): Promise<Workflow> {
   return patch<Workflow>(`workflow/${id}`, data);
 }
 
-async function run(workflow_id: string, company_id: string): Promise<Run> {
+async function run(workflow_id: string, company_id: string) {
   const engine_url = import.meta.env.DEV ? 'http://localhost:8000' : 'https://hiveai-engine-4ae52c8098bb.herokuapp.com/';
   fetch(`${engine_url}/workflow/${workflow_id}/start/company/${company_id}`, {
     method: 'POST',

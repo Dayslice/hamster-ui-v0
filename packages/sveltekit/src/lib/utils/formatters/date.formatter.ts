@@ -5,7 +5,10 @@ import { DateTime } from 'luxon';
  * @param iso
  * @returns formatted date string of Sep 29 at 2:29 PM
  */
-export function formatCasualDateTime(iso: string): string {
+export function formatCasualDateTime(iso: string | Date): string {
+  if (iso instanceof Date) {
+    iso = iso.toISOString();
+  }
   return DateTime.fromISO(iso).toFormat("MMM dd 'at' h:mm a");
 }
 

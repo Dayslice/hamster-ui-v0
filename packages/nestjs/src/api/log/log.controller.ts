@@ -22,6 +22,7 @@ import { LogService } from './log.service';
     join: {
       source_agent: {},
       target_agent: {},
+      attachments: {},
     },
     sort: [
       {

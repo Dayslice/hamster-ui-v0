@@ -9,7 +9,9 @@ async function getMany(): Promise<Step[]> {
 }
 
 async function getManyForWorkflow(workflow_id: string): Promise<Step[]> {
-  return get<Step[]>(`step?filter=workflow_id||$eq||${workflow_id}&join=step_tools&join=primary_agent&join=other_agents`);
+  return get<Step[]>(
+    `step?filter=workflow_id||$eq||${workflow_id}&join=step_tools&join=primary_agent&join=other_agents&join=step_tools.attachments`,
+  );
 }
 
 async function create(data: Partial<Step>): Promise<Step> {

@@ -3,13 +3,17 @@
 </script>
 
 <span
-  class:text-emerald-200={status == 'done'}
-  class:bg-emerald-600={status == 'done'}
-  class:bg-amber-200={status == 'running'}
-  class:text-amber-600={status == 'running'}
-  class:bg-red-200={status == 'error'}
+  class:text-green-600={status == 'done'}
+  class:bg-green-100={status == 'done'}
+  class:border-green-300={status == 'done'}
+  class:bg-yellow-100={status == 'running'}
+  class:text-yellow-600={status == 'running'}
+  class:border-yellow-300={status == 'running'}
+  class:bg-red-100={status == 'error'}
   class:text-red-600={status == 'error'}
-  class:bg-slate-200={status == 'cancelled'}
+  class:border-red-300={status == 'error'}
+  class:bg-slate-100={status == 'cancelled'}
   class:text-slate-600={status == 'cancelled'}
-  class="text-xs px-2 py-0.5 rounded-xl font-semibold">{status}</span
+  class:border-slate-300={status == 'cancelled'}
+  class="text-xs px-2 py-0.5 rounded-xl font-semibold border">{status}</span
 >

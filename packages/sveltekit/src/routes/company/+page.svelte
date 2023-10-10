@@ -76,10 +76,13 @@
         <label for="label" class="block text-sm font-medium text-gray-600 mb-1">Label</label>
         <input id="label" class="w-full border border-gray-300 p-2 rounded" bind:value={newCompany.label} placeholder="Label" />
       </div>
-
+      <div>
+        <label for="logo_url" class="block text-sm font-medium text-gray-600 mb-1">Logo Url</label>
+        <input id="logo_url" class="w-full border border-gray-300 p-2 rounded" bind:value={newCompany.logo_url} placeholder="Logo URL" />
+      </div>
       <div>
         <label for="description" class="block text-sm font-medium text-gray-600 mb-1">Description</label>
-        <input
+        <textarea
           id="description"
           class="w-full border border-gray-300 p-2 rounded"
           bind:value={newCompany.description}
@@ -89,7 +92,7 @@
 
       <div>
         <label for="business_goals" class="block text-sm font-medium text-gray-600 mb-1">Business Goals</label>
-        <input
+        <textarea
           id="business_goals"
           class="w-full border border-gray-300 p-2 rounded"
           bind:value={newCompany.business_goals}
@@ -99,7 +102,7 @@
 
       <div>
         <label for="elevator_pitch" class="block text-sm font-medium text-gray-600 mb-1">Elevator Pitch</label>
-        <input
+        <textarea
           id="elevator_pitch"
           class="w-full border border-gray-300 p-2 rounded"
           bind:value={newCompany.elevator_pitch}

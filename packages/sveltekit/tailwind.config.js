@@ -8,6 +8,9 @@ export default {
       fontSize: {
         'xxs': '0.7rem'
       },  
+      maxHeight:{
+        '120': '30rem'
+      },
       fontFamily: {
         'sans': ['Inter', 'sans-serif'],
       },

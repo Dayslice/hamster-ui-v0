@@ -11,7 +11,7 @@
 </script>
 
 <Panel header="Chat History" contentClass=" !pb-0 !mb-0">
-  <div class=" overflow-y-auto">
+  <div class=" overflow-y-auto max-h-120">
     {#each logs as log}
       <div class="flex items-start mb-4 space-x-4">
         <img src={log.source_agent?.avatar_url || ''} alt={log.source_agent?.name || ''} class="w-10 h-10 rounded-full" />

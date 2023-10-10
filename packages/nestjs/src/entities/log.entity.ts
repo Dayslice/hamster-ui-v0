@@ -6,6 +6,8 @@ import { Run } from './run.entity';
 import { Agent } from './agent.entity';
 import { Attachment } from './attachment.entity';
 import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
+import { StepTool } from './step_tool.entity';
+import { Step } from './step.entity';
 
 @Entity()
 export class Log extends Base {
@@ -48,6 +50,20 @@ export class Log extends Base {
   @ManyToOne(() => Agent, { nullable: true, onDelete: 'SET NULL', onUpdate: 'SET NULL' })
   @JoinColumn({ name: 'target_agent_id' })
   target_agent: Agent;
+
+  @Column({ nullable: true })
+  step_tool_id: string;
+
+  @ManyToOne(() => StepTool, { nullable: true, onDelete: 'CASCADE', onUpdate: 'CASCADE' })
+  @JoinColumn({ name: 'step_tool_id' })
+  step_tool: StepTool;
+
+  @Column({ nullable: true })
+  step_id: string;
+
+  @ManyToOne(() => Step, { nullable: true, onDelete: 'CASCADE', onUpdate: 'CASCADE' })
+  @JoinColumn({ name: 'step_id' })
+  step: Step;
 }
 @Injectable()
 export class LogEntityService extends TypeOrmCrudService<Log> {

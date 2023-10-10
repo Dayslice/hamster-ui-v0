@@ -23,6 +23,9 @@ import { LogService } from './log.service';
       source_agent: {},
       target_agent: {},
       attachments: {},
+      step: {},
+      step_tool: {},
+      'step_tool.tool': {},
     },
     sort: [
       {

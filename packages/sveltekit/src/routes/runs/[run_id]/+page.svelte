@@ -46,6 +46,8 @@
         ['filter', `run_id||$eq||${run_id}`],
         ['join', 'source_agent'],
         ['join', 'attachments'],
+        ['join', 'step'],
+        ['join', 'step_tool'],
       ]);
       if (workflow) {
         steps = await stepService.getManyForWorkflow(workflow.id);
@@ -57,7 +59,7 @@
 {#if run && workflow && logs && steps}
   <main class="grid gap-4 grid-cols-4 p-4 auto-rows-max">
     <Details {workflow} {run} />
-    <StepsOverview {steps} />
+    <StepsOverview {steps} {logs} />
     <Task {workflow} {run} />
     <Agents {steps} />
     <ChatLog {logs} />

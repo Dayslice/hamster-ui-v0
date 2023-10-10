@@ -34,7 +34,6 @@
       prompt: 'Put your data they should discuss here OR reference another step tool like {ID}',
       solution_key: 'The ID of a Step Tool that has the initial solution to start the discussion with.',
     },
-
     semrush: {
       type: 'domain_organic',
       requires_domain: true,
@@ -42,6 +41,9 @@
       display_limit: 20,
       export_columns: 'Ph,Po,Pp,Nq',
       display_sort: 'nq_desc',
+    },
+    markdown: {
+      model_structure: {},
     },
   };
   let newStepTool: Partial<StepTool>;

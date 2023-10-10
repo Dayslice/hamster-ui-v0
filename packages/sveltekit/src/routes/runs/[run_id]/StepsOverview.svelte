@@ -69,7 +69,12 @@
                   </span>
                 {/if}
 
-                <h3 class="font-medium">{step.label}</h3>
+                <h3
+                  class="font-medium text-left text-sm
+                "
+                >
+                  {step.label}
+                </h3>
               </span>
 
               <AgentMini primary_agent={step.primary_agent} other_agents={step.other_agents} />

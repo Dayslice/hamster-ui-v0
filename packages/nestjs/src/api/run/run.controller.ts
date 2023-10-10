@@ -21,6 +21,7 @@ import { Run, RunEntityService } from 'src/entities/run.entity';
   query: {
     join: {
       workflow: {},
+      company: {},
     },
     sort: [
       {

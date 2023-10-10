@@ -10,7 +10,7 @@
   export let logs: Log[] = [];
 </script>
 
-<Panel header="Chat History" class="col-span-2 row-span-4" contentClass=" !pb-0 !mb-0">
+<Panel header="Chat History" contentClass=" !pb-0 !mb-0">
   <div class=" overflow-y-auto">
     {#each logs as log}
       <div class="flex items-start mb-4 space-x-4">

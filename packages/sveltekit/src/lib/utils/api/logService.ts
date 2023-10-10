@@ -1,7 +1,8 @@
 import type { Log } from '$entities/log.entity';
 import { get, post, patch } from './base';
-async function getOne(id: string): Promise<Log> {
-  return get<Log>(`log/${id}`);
+async function getOne(id: string, queryParams: Record<string, string> | string[][] = {}): Promise<Log> {
+  const params: URLSearchParams = new URLSearchParams(queryParams);
+  return get<Log>(`log/${id}?${params.toString()}`);
 }
 
 async function getMany(queryParams: Record<string, string> | string[][]): Promise<Log[]> {

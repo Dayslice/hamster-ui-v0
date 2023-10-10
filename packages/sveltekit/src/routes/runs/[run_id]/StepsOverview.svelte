@@ -45,7 +45,7 @@
   function handleStepClicked(step: Step) {}
 </script>
 
-<Panel header="Step Overview" class="col-span-1 row-span-2">
+<Panel header="Step Overview">
   {#if steps}
     <ul>
       {#each steps as step (step.id)}

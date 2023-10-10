@@ -15,6 +15,7 @@
   import workflowService from '$lib/utils/api/workflowService';
   import logService from '$lib/utils/api/logService';
   import stepService from '$lib/utils/api/stepService';
+  import CompanyOverview from './CompanyOverview.svelte';
   let run_id = $page.params.run_id;
   let run: Run;
   let workflow: Workflow;
@@ -39,7 +40,7 @@
   });
 
   async function fetchData() {
-    run = await runService.getOne(run_id);
+    run = await runService.getOne(run_id, [['join', 'company']]);
     if (run) {
       workflow = await workflowService.getOne(run.workflow_id);
       logs = await logService.getMany([
@@ -57,11 +58,16 @@
 </script>
 
 {#if run && workflow && logs && steps}
-  <main class="grid gap-4 grid-cols-4 p-4 auto-rows-max">
+  <main class="gap-4 p-4 flex flex-col md:grid md:grid-cols-4">
     <Details {workflow} {run} />
-    <StepsOverview {steps} {logs} />
-    <Task {workflow} {run} />
-    <Agents {steps} />
-    <ChatLog {logs} />
+    <div class="col-span-1 flex flex-col gap-4">
+      <CompanyOverview company={run.company} /><StepsOverview {steps} {logs} />
+    </div>
+    <div class="col-span-2 flex flex-col gap-4">
+      <Task {workflow} {run} /><ChatLog {logs} />
+    </div>
+    <div class="col-span-1 flex-col gap-4">
+      <Agents {steps} />
+    </div>
   </main>
 {/if}

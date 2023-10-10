@@ -1,10 +1,11 @@
 import type { Run } from '$entities/run.entity';
 import { get, post, patch } from './base';
-async function getOne(id: string): Promise<Run> {
-  return get<Run>(`run/${id}`);
+async function getOne(id: string, queryParams: Record<string, string> | string[][] = {}): Promise<Run> {
+  const params: URLSearchParams = new URLSearchParams(queryParams);
+  return get<Run>(`run/${id}?${params.toString()}`);
 }
 
-async function getMany(queryParams: Record<string, string>): Promise<Run[]> {
+async function getMany(queryParams: Record<string, string> | string[][] = {}): Promise<Run[]> {
   const params: URLSearchParams = new URLSearchParams(queryParams);
   return get<Run[]>(`run?${params.toString()}`);
 }

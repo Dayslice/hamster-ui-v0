@@ -32,6 +32,9 @@ export class Company extends Base {
   @Column()
   communication_style_id: string;
 
+  @Column({ default: '' })
+  logo_url: string;
+
   @ManyToOne(() => Style)
   @JoinColumn({ name: 'communication_style_id' })
   communication_style: Style;

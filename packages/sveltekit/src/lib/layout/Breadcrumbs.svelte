@@ -10,19 +10,19 @@
     `;
 </script>
 
-<nav class="flex border-b border-gray-200 bg-white" aria-label="Breadcrumb">
-  <ol role="list" class="mx-auto flex w-full max-w-screen-xl space-x-4 px-4 sm:px-6 lg:px-8">
-    {#each breadcrumbs as breadcrumb, i}
-      <li class="flex">
-        <a class="flex items-center text-gray-500 hover:text-gray-700" href={breadcrumb.url}>
-          {#if i == 0}
-            <i class="mr-2 fa-solid fa-house text-xs" />
-          {:else}
-            <i class="mr-6 fa-light fa-chevron-right" />
-          {/if}
-          <span class="text-sm font-medium">{breadcrumb.label}</span>
-        </a>
-      </li>
-    {/each}
-  </ol>
-</nav>
+{#if breadcrumbs.length > 1}
+  <nav class="flex border-b border-gray-200 bg-white mt-2" aria-label="Breadcrumb">
+    <ol role="list" class="flex w-full sm:px-6 lg:px-12">
+      {#each breadcrumbs as breadcrumb, i}
+        <li class="flex">
+          <a class="flex items-center text-gray-500 hover:text-gray-700" href={breadcrumb.url}>
+            {#if i == 0}{:else}
+              <i class="mr-6 fa-light fa-chevron-right" />
+            {/if}
+            <span class="text-sm font-medium">{breadcrumb.label}</span>
+          </a>
+        </li>
+      {/each}
+    </ol>
+  </nav>
+{/if}

@@ -9,9 +9,9 @@
   // You may want to import any icons from a library like FontAwesome or Heroicons
 </script>
 
-<Panel class="col-span-4 row-span-1">
+<Panel class="col-span-4">
   <!-- Workflow Name -->
-  <div class="flex flex-row gap-2 justify-between items-center">
+  <div class="flex flex-col md:flex-row gap-2 justify-start md:justify-between items-center">
     <div data-testid="run-details">
       <div class="flex flex-row items-center gap-3">
         <span class="font-medium text-xl"><span class="text-slate-800">{workflow ? workflow.label : ''}</span></span>
@@ -32,15 +32,15 @@
         </div>
       </div>
     </div>
-    <div class="flex-row flex gap-2 items-center">
+    <div class="flex-row flex gap-2 items-center text-sm">
       <button
         type="button"
-        class="hover:shadow-md shadow-sm border border-amber-400 flex flex-row gap-2 items-center bg-amber-300 rounded-xl px-5 py-2.5 text-lg text-amber-800 font-semibold"
+        class="hover:shadow-md shadow-sm border border-amber-400 flex flex-row gap-2 items-center bg-amber-300 rounded-xl px-5 py-2.5 text-amber-800 font-semibold"
         ><i class="fa-solid fa-cloud-arrow-down" /> Download Deliverable</button
       >
       <button
         type="button"
-        class="hover:shadow-md shadow-sm border border-gray-300 flex flex-row gap-2 items-center bg-slate-300 rounded-xl px-5 py-2.5 text-lg text-slate-800 font-semibold"
+        class="hover:shadow-md shadow-sm border border-gray-300 flex flex-row gap-2 items-center bg-slate-300 rounded-xl px-5 py-2.5 text-slate-800 font-semibold"
         ><i class="fa-solid fa-file-zip" /> Download All</button
       >
     </div>

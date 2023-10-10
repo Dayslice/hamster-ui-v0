@@ -52,17 +52,17 @@
     {#each agents as agent}
       <li class="flex flex-col gap-2 items-left last:mb-0 px-4 first:pt-0 py-4 border-b border-b slate-50 last:border-b-0">
         <div class="flex flex-row items-center">
-          <img src={agent.avatar_url} alt={agent.name} class="w-20 h-20 rounded-full mr-3" />
+          <img src={agent.avatar_url} alt={agent.name} class="w-14 h-14 rounded-full mr-3" />
 
           <!-- Name and Role -->
           <div>
-            <div class="font-semibold text-lg text-slate-800">{agent.name}</div>
-            <div class=" text-amber-400">{agent.title}</div>
+            <div class="font-semibold text-slate-800">{agent.name}</div>
+            <div class="text-sm text-slate-700">{agent.title}</div>
           </div>
         </div>
         <!-- Avatar -->
-        <div class="text-gray-700 text-sm">{agent.background_short.slice(0, 120)}...</div>
-        <div class="flex flex-wrap gap-x-2 gap-y-1">
+        <div class="flex flex-wrap gap-x-2 gap-y-1 items-center">
+          <span class="text-xs text-slate-700 pl-1">skills:</span>
           {#each agent.expertise[0].split(', ') as expertise}
             <span class="bg-slate-100 text-slate-600 text-xs px-2 py-1 rounded-full">{expertise}</span>
           {/each}

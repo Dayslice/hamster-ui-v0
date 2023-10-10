@@ -26,7 +26,7 @@
 <Breadcrumbs {breadcrumbs} />
 <div class="px-12">
   <!-- Workflows Table -->
-  <table class="min-w-full table-auto border-collapse border border-gray-300 mt-4">
+  <table class="min-w-full table-auto border-collapse border border-gray-300 mt-4 bg-white">
     <thead>
       <tr class="bg-gray-800 text-white font-semibold text-sm">
         <th class="px-4 py-2 border border-gray-300">Label</th>
@@ -44,7 +44,6 @@
           <td class="px-4 py-2 border border-gray-300">
             <div class="flex flex-col gap-2 items-center justify-start text-xs">
               <a href={`/workflows/${workflow.id}/edit`} class="text-blue-500 hover:text-blue-700 text-center">View Steps</a>
-              <button class="text-blue-500 hover:text-blue-700 text-center">Run</button>
             </div>
           </td>
         </tr>

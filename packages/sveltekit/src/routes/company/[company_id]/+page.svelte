@@ -23,11 +23,11 @@
   });
 </script>
 
-<div class="px-16 py-10 border-slate-300 flex flex-col gap-6">
+<div class="px-16 py-10 border-slate-300 flex flex-col gap-6 bg-white">
   <div class="flex flex-row items-end w-full justify-end">
     <WorkflowRunner companyId={company_id} />
   </div>
-  <table class="divide-y divide-gray-300 px-12 w-full">
+  <table class="divide-y divide-gray-300 px-12 w-full bg-white">
     <thead>
       <tr>
         <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500 sm:pl-0">Run ID</th>

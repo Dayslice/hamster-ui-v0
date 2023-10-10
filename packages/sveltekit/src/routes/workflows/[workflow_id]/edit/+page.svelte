@@ -61,7 +61,7 @@
 </script>
 
 <Breadcrumbs {breadcrumbs} />
-<div class="px-12">
+<div class="px-12 bg-white">
   <!-- Steps Table -->
   <table class="min-w-full table-auto border-collapse border border-gray-300 mt-4">
     <thead>

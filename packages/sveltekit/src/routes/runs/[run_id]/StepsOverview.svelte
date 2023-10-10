@@ -56,16 +56,16 @@
             <button type="button" class="flex flex-row justify-between gap-2 items-center w-full" on:click={() => handleStepClicked(step)}>
               <span class="flex flex-row gap-2 items-center">
                 {#if status == stepStatus.IN_PROGRESS}
-                  <span class="rounded-full flex flex-col items-center justify-center px-1 py-0.5 bg-yellow-200">
-                    <i class="text-xs fa-solid fa-spinner text-yellow-800 animate-spin" />
+                  <span class="rounded-full flex flex-col items-center justify-center px-1 py-0.5 bg-yellow-100 border border-yellow-300">
+                    <i class="text-xs fa-solid fa-spinner text-yellow-600 animate-spin" />
                   </span>
                 {:else if status == stepStatus.NOT_STARTED}
-                  <span class="rounded-full flex flex-col items-center justify-center px-1 py-0.5 bg-gray-200">
-                    <i class="text-xs fa-solid fa-ellipsis text-gray-600" />
+                  <span class="rounded-full flex flex-col items-center justify-center px-1 py-0.5 bg-slate-100 border border-slate-300">
+                    <i class="text-xs fa-solid fa-ellipsis text-slate-600" />
                   </span>
                 {:else}
-                  <span class="rounded-full flex flex-col items-center justify-center px-1 py-0.5 bg-green-300">
-                    <i class=" text-xs fa-solid fa-check text-green-800" />
+                  <span class="rounded-full flex flex-col items-center justify-center px-1 py-0.5 bg-green-100 border border-green-300">
+                    <i class=" text-xs fa-solid fa-check text-green-600" />
                   </span>
                 {/if}
 

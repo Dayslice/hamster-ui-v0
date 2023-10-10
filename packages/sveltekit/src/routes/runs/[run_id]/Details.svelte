@@ -11,27 +11,27 @@
 
 <Panel class="col-span-4">
   <!-- Workflow Name -->
-  <div class="flex flex-col md:flex-row gap-2 justify-start md:justify-between items-center">
-    <div data-testid="run-details">
+  <div class="flex flex-col md:flex-row ustify-start md:justify-between items-center">
+    <div data-testid="run-details" class="flex flex-col gap-1.5">
       <div class="flex flex-row items-center gap-3">
         <span class="font-medium text-xl"><span class="text-slate-800">{workflow ? workflow.label : ''}</span></span>
 
         <Status status={run.status} />
       </div>
-      <div class="flex flex-row items-center gap-3 text-sm text-slate-400">
+      <div class="flex flex-row items-center gap-4 text-sm text-slate-400">
         <div class="flex flex-row gap-1 items-center">
-          <i class="fa-solid fa-calendar-days" />
+          <i class="fa-solid fa-calendar-days text-xs" />
           {formatCasualDateTime(run.created_at)}
         </div>
         <div class="flex flex-row gap-1 items-center">
-          <i class="fa-solid fa-clock" />
+          <i class="fa-solid fa-clock text-xs" />
           {formatDuration(run.created_at, run.updated_at)}
           {#if run.status == 'running'}
             so far
           {/if}
         </div>
         <div class="flex flex-row gap-1 items-center">
-          <i class="fa-solid fa-tag" />
+          <i class="fa-solid fa-tag text-xs" />
           {run.id.slice(-4)}
         </div>
       </div>

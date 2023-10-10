@@ -49,7 +49,7 @@
   {#if steps}
     <ul>
       {#each steps as step (step.id)}
-        {@const status = getStepStatus(step)}
+        {@const status = getStepStatus(step.id)}
         <li class="first:border-t-0 border-t first:pt-0 pt-4 pb-2">
           <!-- Step Title and Description -->
           <div class="flex flex-col gap-1">

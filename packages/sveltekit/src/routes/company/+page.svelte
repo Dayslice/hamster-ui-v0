@@ -53,7 +53,16 @@
     <tbody>
       {#each companies as company}
         <tr class="hover:bg-gray-100 text-sm">
-          <td class="px-4 py-2 border border-gray-300">{company.label}</td>
+          <td class="px-4 py-2 border border-gray-300 text-center"
+            ><div class=" flex flex-col justify-center items-center">
+              <img
+                class="w-12 h-12 rounded-full aspect-square border-2 border-slate-100"
+                alt="{company.label} logo"
+                src={company.logo_url}
+              />
+              {company.label}
+            </div></td
+          >
           <td class="px-4 py-2 border border-gray-300">{company.description}</td>
           <td class="px-4 py-2 border border-gray-300">{company.business_goals}</td>
           <td class="px-4 py-2 border border-gray-300">{company.elevator_pitch}</td>

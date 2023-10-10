@@ -9,7 +9,7 @@
   // Example steps data. This would be fetched or passed as props.
   export let steps: any[] = [];
   export let logs: Log[] = [];
-
+  export let runComplete: boolean;
   let log_attachments: Record<string, Log[]> = {};
   $: if (logs) {
     let new_log_attachments: Record<string, Log[]> = {};
@@ -37,7 +37,7 @@
       return stepStatus.NOT_STARTED;
     }
 
-    if (logs[logs.length - 1].step_id == step_id) {
+    if (logs[logs.length - 1].step_id == step_id && !runComplete) {
       return stepStatus.IN_PROGRESS;
     }
     return stepStatus.DONE;

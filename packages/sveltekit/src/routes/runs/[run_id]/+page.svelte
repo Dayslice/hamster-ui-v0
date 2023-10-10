@@ -61,7 +61,7 @@
   <main class="gap-4 p-4 flex flex-col md:grid md:grid-cols-4">
     <Details {workflow} {run} />
     <div class="col-span-1 flex flex-col gap-4">
-      <CompanyOverview company={run.company} /><StepsOverview {steps} {logs} />
+      <CompanyOverview company={run.company} /><StepsOverview {steps} {logs} runComplete={run.status == 'done'} />
     </div>
     <div class="col-span-2 flex flex-col gap-4">
       <Task {workflow} {run} /><ChatLog {logs} />

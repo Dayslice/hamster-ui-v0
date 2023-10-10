@@ -19,7 +19,7 @@
   let tools: Tool[] = [];
   let selectedStepTool: StepTool | null = null;
   let originalStepTool: StepTool | null = null;
-
+  let inJsonEditor = false;
   let jsonStarters: Record<string, any> = {
     summary: {
       data: 'Put your data OR reference another step tool like {ID}',
@@ -88,6 +88,10 @@
   }
 
   async function createOrUpdateStepTool() {
+    if (inJsonEditor) {
+      return; // Return early and don't process the submission
+    }
+
     newStepTool.config = configJson.json;
     let result: StepTool;
     if (selectedStepTool) {
@@ -98,8 +102,7 @@
     const uuids = extractUUIDs(JSON.stringify(newStepTool.config));
     stepToolService.updateInputs(result.id, uuids);
     stepTools = await stepToolService.getManyForStep(stepId);
-    newStepTool = initializeStepTool();
-    selectedStepTool = null;
+    reset();
   }
 
   function extractUUIDs(jsonString: string) {
@@ -128,6 +131,7 @@
     selectedStepTool = null;
     newStepTool = initializeStepTool();
     configJson = { ...configJson, json: {} };
+    configJson = configJson;
   }
 
   async function moveOrder(index: number, direction: number) {
@@ -149,6 +153,13 @@
 
     // Update the local list of items (If needed, depending on how your service updates data)
     stepTools = [...stepTools];
+  }
+
+  function handleJsonEditorKeydown(event: KeyboardEvent) {
+    // Check if the pressed key is Enter
+    if (event.key === 'Enter' || event.keyCode === 13) {
+      event.preventDefault(); // Prevent the default behavior (form submission)
+    }
   }
 </script>
 
@@ -215,7 +226,7 @@
         </div>
         <div class="mb-4">
           <label class="block mb-2">Configuration</label>
-          <JSONEditor bind:content={configJson} />
+          <JSONEditor bind:content={configJson} onFocus={() => (inJsonEditor = true)} onBlur={() => (inJsonEditor = false)} />
         </div>
         <div class="flex justify-between items-center">
           <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 active:bg-blue-800">

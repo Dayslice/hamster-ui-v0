@@ -6,10 +6,14 @@
   import AgentMini from '$lib/ui/AgentMini.svelte';
   import AttachmentMini from '$lib/ui/AttachmentMini.svelte';
 
+  let classList = '';
+  export { classList as class };
+
   // Example steps data. This would be fetched or passed as props.
   export let steps: any[] = [];
   export let logs: Log[] = [];
   export let runComplete: boolean;
+
   let log_attachments: Record<string, Log[]> = {};
   $: if (logs) {
     let new_log_attachments: Record<string, Log[]> = {};
@@ -45,7 +49,7 @@
   function handleStepClicked(step: Step) {}
 </script>
 
-<Panel header="Step Overview">
+<Panel class={classList} header="Workflow Steps">
   {#if steps}
     <ul>
       {#each steps as step (step.id)}

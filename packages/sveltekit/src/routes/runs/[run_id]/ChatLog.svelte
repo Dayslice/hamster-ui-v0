@@ -2,15 +2,17 @@
   import type { Log } from '$entities/log.entity';
   import Panel from '$lib/layout/Panel.svelte';
   import AttachmentChat from '$lib/ui/AttachmentChat.svelte';
-  import AttachmentMini from '$lib/ui/AttachmentMini.svelte';
   import { formatCasualDateTime } from '$lib/utils/formatters/date.formatter';
   import SvelteMarkdown from 'svelte-markdown';
+
+  let classList = '';
+  export { classList as class };
 
   // Placeholder data for chat logs.
   export let logs: Log[] = [];
 </script>
 
-<Panel header="Chat History" contentClass=" !pb-0 !mb-0">
+<Panel class={classList} header="Work History" contentClass=" !pb-0 !mb-0">
   <div class=" overflow-y-auto max-h-120 -mx-6 px-6 -my-6 py-6">
     {#each logs as log}
       <div class="flex items-start mb-4 space-x-4">

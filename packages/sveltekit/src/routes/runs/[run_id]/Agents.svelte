@@ -1,21 +1,10 @@
 <script lang="ts">
+  import type { Agent } from '$entities/agent.entity';
+  import type { Step } from '$entities/step.entity';
   import Panel from '$lib/layout/Panel.svelte';
 
-  interface Agent {
-    id: string;
-    name: string;
-    expertise: string;
-    title: string;
-    background_short: string;
-    avatar_url: string;
-    [key: string]: any;
-  }
-
-  interface Step {
-    primary_agent: Agent;
-    other_agents: Agent[];
-    [key: string]: any;
-  }
+  let classList = '';
+  export { classList as class };
 
   export let steps: any[];
 
@@ -47,7 +36,7 @@
   $: agents = getUniqueAgents(steps);
 </script>
 
-<Panel header="Workflow Roster" class="col-span-1 row-span-4">
+<Panel header="Workflow Team" class={classList}>
   <ul>
     {#each agents as agent}
       <li class="flex flex-col gap-2 items-left last:mb-0 px-4 first:pt-0 py-4 border-b border-b slate-50 last:border-b-0">

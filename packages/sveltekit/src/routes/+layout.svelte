@@ -9,7 +9,7 @@
   <!-- In your SvelteKit project, add in the <head> of your layout or html file -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
 </svelte:head>
-<div class="flex flex-col gap-0 w-full bg-slate-50">
+<div class="flex flex-col gap-0 w-full bg-slate-50 text-slate-800">
   <LeftNav />
   <Content>
     <slot />

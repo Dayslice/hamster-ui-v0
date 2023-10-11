@@ -1,4 +1,5 @@
 {
-    "workbench.tree.indent": 15,
-    "workbench.tree.renderIndentGuides": "always"
+  "workbench.tree.indent": 15,
+  "workbench.tree.renderIndentGuides": "always",
+  "editor.defaultFormatter": null
 }

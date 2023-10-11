@@ -16,6 +16,7 @@
   import logService from '$lib/utils/api/logService';
   import stepService from '$lib/utils/api/stepService';
   import CompanyOverview from './CompanyOverview.svelte';
+  import Result from './Result.svelte';
   let run_id = $page.params.run_id;
   let run: Run;
   let workflow: Workflow;
@@ -58,15 +59,21 @@
 </script>
 
 {#if run && workflow && logs && steps}
-  <main class="gap-4 p-4 flex flex-col md:grid md:grid-cols-4">
-    <Details {workflow} {run} />
-    <div class="col-span-1 flex flex-col gap-4">
-      <CompanyOverview company={run.company} /><StepsOverview {steps} {logs} runComplete={run.status == 'done'} />
+  <main class="gap-4 p-4 flex flex-col md:grid md:grid-cols-3 lg:grid-cols-4">
+    <div class="row-start-1 row-end-3 col-span-1 flex flex-col gap-4">
+      <Details {workflow} {run} />
+
+      <StepsOverview {steps} {logs} runComplete={run.status == 'done'} />
     </div>
-    <div class="col-span-2 flex flex-col gap-4">
-      <Task {workflow} {run} /><ChatLog {logs} />
+    <div class=" col-start-2 col-end-4 row-span-4 flex flex-col gap-4">
+      <Result class="" {run} {logs} />
+      <ChatLog class=" col-start-2 col-end-4" {logs} />
     </div>
-    <div class="col-span-1 flex-col gap-4">
+
+    <div
+      class="flex flex-col gap-4 md:col-start-1 md:col-end-2 md:row-start-3 md:row-end-4 lg:col-start-4 lg:col-end-5 lg:row-start-1 lg:row-end-2"
+    >
+      <CompanyOverview company={run.company} />
       <Agents {steps} />
     </div>
   </main>

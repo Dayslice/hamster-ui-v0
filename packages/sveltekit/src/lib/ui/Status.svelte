@@ -3,9 +3,9 @@
 </script>
 
 <span
-  class:text-green-600={status == 'done'}
-  class:bg-green-100={status == 'done'}
-  class:border-green-300={status == 'done'}
+  class:text-emerald-600={status == 'done'}
+  class:bg-emerald-100={status == 'done'}
+  class:border-emerald-300={status == 'done'}
   class:bg-yellow-100={status == 'running'}
   class:text-yellow-600={status == 'running'}
   class:border-yellow-300={status == 'running'}

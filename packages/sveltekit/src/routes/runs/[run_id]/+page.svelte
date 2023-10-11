@@ -66,7 +66,7 @@
       <StepsOverview {steps} {logs} runComplete={run.status == 'done'} />
     </div>
     <div class=" col-start-2 col-end-4 row-span-4 flex flex-col gap-4">
-      <Result class="" {run} {logs} />
+      <Result agent={logs[0].source_agent} {workflow} {run} {logs} />
       <ChatLog class=" col-start-2 col-end-4" {logs} />
     </div>
 

@@ -23,9 +23,16 @@
   let logs: Log[] = [];
   let steps: Step[];
   let interval_id: number | NodeJS.Timer;
-
+  let log_interval_id: number | NodeJS.Timer;
   onMount(async () => {
     await fetchData();
+    log_interval_id = setInterval(async () => {
+      if (logs.length == 0) {
+        await fetchData();
+      } else {
+        clearInterval(log_interval_id); // stop the interval if the status isn't 'running'
+      }
+    }, 2000);
 
     interval_id = setInterval(async () => {
       if (run && run.status === 'running') {
@@ -33,11 +40,12 @@
       } else {
         clearInterval(interval_id); // stop the interval if the status isn't 'running'
       }
-    }, 30000);
+    }, 20000);
   });
 
   onDestroy(() => {
     clearInterval(interval_id); // always clear the interval when the component is destroyed
+    clearInterval(log_interval_id);
   });
 
   async function fetchData() {
@@ -66,7 +74,9 @@
       <StepsOverview {steps} {logs} runComplete={run.status == 'done'} />
     </div>
     <div class=" col-start-2 col-end-4 row-span-4 flex flex-col gap-4">
-      <Result agent={logs[0].source_agent ?? undefined} {workflow} {run} {logs} />
+      {#if logs.length > 0}
+        <Result agent={logs[0].source_agent ?? undefined} {workflow} {run} {logs} />
+      {/if}
       <ChatLog class=" col-start-2 col-end-4" {logs} />
     </div>
 

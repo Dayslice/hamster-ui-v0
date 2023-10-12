@@ -1,10 +1,8 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { createEventDispatcher, onMount } from 'svelte';
   import workflowService from '$lib/utils/api/workflowService';
   import type { Workflow } from '$entities/workflow.entity';
-  import type { Run } from '$entities/run.entity';
-  import { goto } from '$app/navigation';
-
+  const dispatchEvent = createEventDispatcher();
   export let companyId: string;
   let workflows: Workflow[] = [];
   let selectedWorkflowId: string | null = null;
@@ -22,7 +20,7 @@
     if (selectedWorkflowId) {
       try {
         workflowService.run(selectedWorkflowId, companyId);
-        goto(`/company/${companyId}`);
+        setTimeout(() => dispatchEvent('reload'), 1200);
       } catch (error) {
         console.error('Error running workflow:', error);
         alert('Failed to start the workflow.');

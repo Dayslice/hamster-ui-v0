@@ -6,7 +6,7 @@
 </script>
 
 <a
-  href="file:/{attachment.url}"
+  href={attachment.url}
   target="_blank"
   class="w-fit mt-4 mb-2 p-2 text-sm rounded-md bg-slate-50 border border-slate-300 hover:shadow-md hover:bg-gray-50 transition-all duration-200 flex items-center space-x-2"
 >

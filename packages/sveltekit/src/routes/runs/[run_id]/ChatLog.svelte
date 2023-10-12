@@ -14,13 +14,6 @@
 
 <Panel class={classList} header="Work History" contentClass=" !pb-0 !mb-0">
   <div class=" overflow-y-auto max-h-160 -mx-6 px-6 -my-6 py-6">
-    {#if logs.length == 0}
-      <div class="text-center border border-dashed border-slate-200 mx-14 py-4">
-        <span class="text-sm text-slate-400">
-          <i class="fa-regular fa-clock" /> No work messages. Please wait for the team to send their first update.</span
-        >
-      </div>
-    {/if}
     {#each logs as log}
       <div class="flex items-start mb-4 space-x-4">
         <img src={log.source_agent?.avatar_url || ''} alt={log.source_agent?.name || ''} class="w-10 h-10 rounded-full" />

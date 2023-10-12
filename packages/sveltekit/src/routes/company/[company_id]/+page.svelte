@@ -21,16 +21,11 @@
     runs = await fetchRuns(company_id);
     workflows = await workflowService.getMany();
   });
-
-  const reload = async () => {
-    runs = await fetchRuns(company_id);
-    goto(`/runs/${runs[0].id}`);
-  };
 </script>
 
 <div class="px-16 py-10 border-slate-300 flex flex-col gap-6 bg-white">
   <div class="flex flex-row items-end w-full justify-end">
-    <WorkflowRunner companyId={company_id} on:reload={() => reload()} />
+    <WorkflowRunner companyId={company_id} />
   </div>
   <table class="divide-y divide-gray-300 px-12 w-full bg-white">
     <thead>

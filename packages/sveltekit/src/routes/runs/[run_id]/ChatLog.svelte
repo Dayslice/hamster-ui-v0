@@ -13,7 +13,7 @@
 </script>
 
 <Panel class={classList} header="Work History" contentClass=" !pb-0 !mb-0">
-  <div class=" overflow-y-auto max-h-160 -mx-6 px-6 -my-6 py-6">
+  <div class=" overflow-y-auto max-h-160 -mx-6 px-6 -mt-6 -mb-4 py-6 rounded-b-lg">
     {#if logs.length == 0}
       <div class="text-center border border-dashed border-slate-200 mx-14 py-4">
         <span class="text-sm text-slate-400">

@@ -12,13 +12,13 @@ if (result.error) {
 const PROD_ENV = 'production';
 
 const devConfig = {
-  url: process.env.DATABASE_URL,
+  url: process.env.STACKHERO_POSTGRESQL_URL,
   synchronize: false,
   ssl: false,
 };
 
 const prodConfig = {
-  url: process.env.DATABASE_URL,
+  url: process.env.STACKHERO_POSTGRESQL_URL,
   ssl: {
     rejectUnauthorized: false,
   },

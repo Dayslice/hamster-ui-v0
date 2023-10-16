@@ -35,6 +35,10 @@
   }
 
   function handleRunAgain(e: MouseEvent) {}
+
+  function handleCopyToClipboard(content: string) {
+    navigator.clipboard.writeText(content);
+  }
 </script>
 
 <Panel
@@ -43,9 +47,12 @@
 "
 >
   <div slot="actions">
-    <button type="button" class="bg-slate-700 text-white font-semibold text-xs px-4 py-2 rounded-lg -mt-2" on:click={handleRunAgain}
+    <!-- <button
+      type="button"
+      class="bg-slate-700 text-white font-semibold text-xs px-4 py-2 rounded-lg -mt-2"
+      on:click={handleRunAgain}
       ><i class="fa-solid fa-rotate ml-1" /> Run Again
-    </button>
+    </button> -->
   </div>
   {#if run.status == 'done'}
     <div class="flex flex-col gap-4 text-sm">
@@ -75,11 +82,12 @@
 
       <div class="flex flex-row justisfy-between items-center">
         <span>
-          Below is the teams' final message for this workflow. You can <button
-            class="hover:underline hover:decoration-dashed font-semibold text-emerald-500">copy it to your clipboard</button
+          Below is the teams' final message for this workflow. <button
+            class="hover:underline hover:decoration-dashed font-semibold text-emerald-500"
+            on:click={() => handleCopyToClipboard(logs[logs.length - 1].content)}>Copy it to your clipboard.</button
           >
-          or you can
-          <button class=" text-emerald-500 font-semibold">use it as the input to another workflow</button>.
+          <!-- or you can
+          <button class=" text-emerald-500 font-semibold">use it as the input to another workflow</button> -->
         </span>
       </div>
       <div class="markdown-body text-sm leading-relaxed whitespace-pre-wrap bg-slate-100 border border-slate-300 px-6 py-4 text-slate-800">

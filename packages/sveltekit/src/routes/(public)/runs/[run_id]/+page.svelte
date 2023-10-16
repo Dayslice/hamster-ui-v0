@@ -2,11 +2,9 @@
   import Details from './Details.svelte';
   import { page } from '$app/stores';
   import { onMount, onDestroy } from 'svelte';
-  import { fetchLogs, fetchRun, fetchSteps, fetchWorkflow } from '$lib/utils/fetchLogs';
   import Agents from './Agents.svelte';
   import StepsOverview from './StepsOverview.svelte';
   import ChatLog from './ChatLog.svelte';
-  import Task from './Task.svelte';
   import type { Log } from '$entities/log.entity';
   import type { Workflow } from '$entities/workflow.entity';
   import type { Run } from '$entities/run.entity';
@@ -24,6 +22,7 @@
   let steps: Step[];
   let interval_id: number | NodeJS.Timer;
   let log_interval_id: number | NodeJS.Timer;
+
   onMount(async () => {
     await fetchData();
     log_interval_id = setInterval(async () => {

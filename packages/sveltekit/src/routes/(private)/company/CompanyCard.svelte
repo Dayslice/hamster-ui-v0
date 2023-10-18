@@ -7,7 +7,9 @@
 
 {#if company}
   <a class="group bg-white shadow-md hover:shadow-lg rounded-lg w-full border border-slate-300" role="button" href="/company/{company.id}">
-    <div class="p-4 bg-slate-100 border-b border-b-slate-200 justify-between flex flex-col md:flex-row gap-1 md:gap-6 items-start">
+    <div
+      class="p-4 bg-slate-100 border-b rounded-t-lg border-b-slate-200 justify-between flex flex-col md:flex-row gap-1 md:gap-6 items-start"
+    >
       <div class="flex flex-row items-start">
         <img class="w-16 h-16 rounded-full border-2" alt="{company.label} logo" src={company.logo_url} />
         <div class="ml-4">

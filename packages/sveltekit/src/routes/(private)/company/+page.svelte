@@ -3,6 +3,7 @@
   import Breadcrumbs from '$lib/layout/Breadcrumbs.svelte';
   import companyService from '$lib/utils/api/companyService';
   import { onMount } from 'svelte';
+  import CompanyCard from './CompanyCard.svelte';
 
   let companies: Company[] = [];
   let newCompany: Partial<Company> = {
@@ -37,46 +38,13 @@
 </script>
 
 <Breadcrumbs {breadcrumbs} />
-<div class="px-12 bg-white">
-  <!-- Companies Table -->
-  <table class="min-w-full table-auto border-collapse border border-gray-300 mt-4">
-    <thead>
-      <tr class="bg-gray-800 text-white font-semibold text-sm">
-        <th class="px-4 py-2 border border-gray-300">Label</th>
-        <th class="px-4 py-2 border border-gray-300">Description</th>
-        <th class="px-4 py-2 border border-gray-300">Business Goals</th>
-        <th class="px-4 py-2 border border-gray-300">Elevator Pitch</th>
-        <th class="px-4 py-2 border border-gray-300">URL</th>
-        <th class="px-4 py-2 border border-gray-300">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      {#each companies as company}
-        <tr class="hover:bg-gray-100 text-sm">
-          <td class="px-4 py-2 border border-gray-300 text-center"
-            ><div class=" flex flex-col justify-center items-center">
-              <img
-                class="w-12 h-12 rounded-full aspect-square border-2 border-slate-100"
-                alt="{company.label} logo"
-                src={company.logo_url}
-              />
-              {company.label}
-            </div></td
-          >
-          <td class="px-4 py-2 border border-gray-300">{company.description}</td>
-          <td class="px-4 py-2 border border-gray-300">{company.business_goals}</td>
-          <td class="px-4 py-2 border border-gray-300">{company.elevator_pitch}</td>
-          <td class="px-4 py-2 border border-gray-300">{company.url}</td>
-          <td class="px-4 py-2 border border-gray-300">
-            <div class="flex flex-col gap-2 items-center justify-start text-xs">
-              <a href={`/company/${company.id}`} class="text-blue-500 hover:text-blue-700 text-center">View Details</a>
-              <!-- Other actions can be added here -->
-            </div>
-          </td>
-        </tr>
-      {/each}
-    </tbody>
-  </table>
+<div class="p-12 py-6 bg-white">
+  <h1 class="text-2xl font-semibold mb-4">Companies</h1>
+  <div class="grid grid-cols-1 xl:grid-cols-2 gap-8 mx-auto">
+    {#each companies as company}
+      <CompanyCard {company} />
+    {/each}
+  </div>
 
   <div class="mt-10 px-6 py-4 bg-white border-t border-t-slate-200">
     <h2 class="text-xl text-slate-800 font-semibold mb-6">Create New Company</h2>

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "pnpm --filter nestjs run start:dev && pnpm --filter sveltekit run dev",
-    "prod-frontend": "pnpm --filter nestjs run build && pnpm --filter nestjs run start:prod",
+    "prod-backend": "pnpm --filter nestjs run build && pnpm --filter nestjs run start:prod",
     "heroku-prebuild": "npm install -g pnpm",
     "heroku-postbuild": "cd packages/nestjs && pnpm install"
   },

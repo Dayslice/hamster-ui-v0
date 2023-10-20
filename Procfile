@@ -1,1 +1,1 @@
-web: pnpm run prod-frontend
+web: pnpm run prod-backend

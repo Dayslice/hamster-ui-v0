@@ -10,6 +10,7 @@ import { LogModule } from './log/log.module';
 import { StyleModule } from './style/style.module';
 import { ToolModule } from './tool/tool.module';
 import { UserModule } from './user/user.module';
+import { SourceModule } from './source/source.module';
 @Module({
   imports: [
     AgentModule,
@@ -17,6 +18,7 @@ import { UserModule } from './user/user.module';
     CompanyModule,
     LogModule,
     RunModule,
+    SourceModule,
     StepModule,
     StyleModule,
     ToolModule,

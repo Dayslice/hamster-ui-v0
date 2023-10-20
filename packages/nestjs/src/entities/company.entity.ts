@@ -8,6 +8,7 @@ import { Style } from './style.entity';
 import { Run } from './run.entity';
 import { User } from './user.entity';
 import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
+import { Source } from './source.entity';
 
 @Entity()
 export class Company extends Base {
@@ -44,6 +45,9 @@ export class Company extends Base {
 
   @OneToMany(() => User, (user) => user.company)
   users: User[];
+
+  @OneToMany(() => Source, (source) => source.company)
+  sources: Source[];
 }
 @Injectable()
 export class CompanyEntityService extends TypeOrmCrudService<Company> {

@@ -34,6 +34,15 @@
       prompt: 'Put your data they should discuss here OR reference another step tool like {ID}',
       solution_key: 'The ID of a Step Tool that has the initial solution to start the discussion with.',
     },
+    pdf: {
+      map_prompt: `Write a concise summary of the following text delimited by triple backquotes.
+              Return your response in bullet points which covers the key points of the text.
+              \`\`\`{text}\`\`\`
+              BULLET POINT SUMMARY:`,
+      combine_prompt: `Write a summary of this chunk of text that includes the main points and any important details.
+                      {text}`,
+      pdf_url: 'https://**.pdf',
+    },
     semrush: {
       type: 'domain_organic',
       requires_domain: true,

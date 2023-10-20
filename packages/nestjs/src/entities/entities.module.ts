@@ -11,15 +11,17 @@ import { Style, StyleEntityService } from './style.entity';
 import { Tool, ToolEntityService } from './tool.entity';
 import { Workflow, WorkflowEntityService } from './workflow.entity';
 import { StepTool, StepToolEntityService } from './step_tool.entity';
+import { Source, SourceEntityService } from './source.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Agent, Attachment, Company, Log, Run, Step, StepTool, Style, Tool, User, Workflow])],
+  imports: [TypeOrmModule.forFeature([Agent, Attachment, Company, Log, Run, Source, Step, StepTool, Style, Tool, User, Workflow])],
   providers: [
     AgentEntityService,
     AttachmentEntityService,
     CompanyEntityService,
     LogEntityService,
     RunEntityService,
+    SourceEntityService,
     StepEntityService,
     StepToolEntityService,
     StyleEntityService,
@@ -33,6 +35,7 @@ import { StepTool, StepToolEntityService } from './step_tool.entity';
     CompanyEntityService,
     LogEntityService,
     RunEntityService,
+    SourceEntityService,
     StepEntityService,
     StepToolEntityService,
     StyleEntityService,

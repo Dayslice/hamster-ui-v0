@@ -2,7 +2,7 @@
 https://docs.nestjs.com/providers#services
 */
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { Document } from 'langchain/document';
 import { Source, SourceEntityService } from 'src/entities/source.entity';
 
@@ -14,6 +14,7 @@ import { PDFLoader } from 'langchain/document_loaders/fs/pdf';
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
 @Injectable()
 export class SourceService {
+  private readonly logger = new Logger(SourceService.name);
   constructor(protected entity: SourceEntityService) {}
 
   async dumpPDFtoSource(file: Express.Multer.File, company_id: string): Promise<Source[]> {
@@ -61,58 +62,79 @@ export class SourceService {
     return await this.entity.addOne(partial);
   }
 
+  private splitContent(content: string, index: number, threshold: number): number {
+    const lineBreakPos = content.indexOf('\n', index);
+    if (lineBreakPos !== -1 && lineBreakPos - index <= threshold) {
+      return lineBreakPos;
+    }
+    const endMarkers = ['.', '?', '!'];
+    for (let i = index; i < index + threshold && i < content.length; i++) {
+      if (endMarkers.includes(content[i])) {
+        return i;
+      }
+    }
+    return index + threshold;
+  }
+
   chunkText(document: Document<Record<string, any>>, chunkSize: number, threshold: number): Document<Record<string, any>>[] {
     const chunks: Document<Record<string, any>>[] = [];
     let currentIndex = 0;
     const text = document.pageContent;
 
     while (currentIndex < text.length) {
-      let endIndex = currentIndex + chunkSize;
-
-      // Ensure we're not exceeding the string length
-      if (endIndex >= text.length) {
-        endIndex = text.length - 1;
+      let nextIndex = currentIndex + chunkSize; // initial next index
+      if (nextIndex < text.length) {
+        // if not the last chunk
+        nextIndex = this.splitContent(text, nextIndex, threshold);
+      } else {
+        nextIndex = text.length - 1;
       }
-
-      // If we're inside a sentence, extend to the end of the sentence.
-      if (text[endIndex] !== '.' && text[endIndex] !== '\n') {
-        const originalEndIndex = endIndex;
-        while (endIndex < text.length && text[endIndex] !== '.' && endIndex - originalEndIndex <= threshold) {
-          endIndex++;
-        }
-        // If we didn't find a period, revert to original endIndex
-        if (endIndex >= text.length || text[endIndex] !== '.') {
-          endIndex = originalEndIndex;
-        }
-      }
-
-      // If we're close to a paragraph end (within threshold), extend to the end of the paragraph.
-      const nextNewLine = text.indexOf('\n', endIndex);
-      if (nextNewLine !== -1 && nextNewLine - endIndex <= threshold) {
-        endIndex = nextNewLine;
-      }
-
-      // Push the chunk and update currentIndex
-      const chunkContent = text.substring(currentIndex, endIndex + 1).trim();
+      // if not the last chunk
+      const chunkContent = text.substring(currentIndex, nextIndex).trim();
       if (chunkContent) {
         chunks.push(new Document({ metadata: document.metadata, pageContent: chunkContent }));
       }
-      currentIndex = endIndex + 1; // Move past the period or newline character
+      currentIndex = nextIndex + 1; // Move past the period or newline character
     }
-
     return chunks;
   }
 
-  async summarizeSearch(query: string, content: string[]): Promise<string> {
+  async summarizeSearch(query: string, content: string[], temperature: string): Promise<string> {
     // We can construct an LLMChain from a PromptTemplate and an LLM.
-    const model = new OpenAI({ temperature: 0, openAIApiKey: process.env['OPEN_AI_KEY'] });
+    const model = new OpenAI({ temperature: parseFloat(temperature), openAIApiKey: process.env['OPEN_AI_KEY'], maxTokens: -1 });
     const prompt = PromptTemplate.fromTemplate(
-      `Based ONLY on the following SOURCES of information, summarize an answer to the QUERY. SOURCES: ${content.join(
+      `Based ONLY on the following SOURCES of information, summarize an answer to the QUERY. Include a list of REFERENCES using the URL of the pages you used for reference. SOURCES: ${content.join(
         '\n\n',
       )}.  Query: {query}?`,
     );
     const chainA = new LLMChain({ llm: model, prompt });
     const res = await chainA.call({ query });
     return res.text;
+  }
+
+  async addWebSources(docs: Document[], company_id: string): Promise<Source[]> {
+    const embeddings = new OpenAIEmbeddings({ openAIApiKey: process.env['OPEN_AI_KEY'] });
+    const docContent = docs.map((doc) => doc.pageContent);
+    const embeddedDocs = await embeddings.embedDocuments(docContent);
+    const uuid = uuidv4();
+    const sources = [];
+
+    this.logger.log(`Preparing a new set of soruces - ${docs.length}`);
+    for (let i = 0; i < docs.length; i++) {
+      const slug = docs[i].metadata.title;
+      this.logger.log(`Saving new Source - ${slug}-${i}`);
+      sources.push({
+        metadata: { ...docs[i].metadata },
+        embeddings: `[${embeddedDocs[i].join(',')}]`, // Use the loop index to access the corresponding embeddedDoc
+        content: docs[i].pageContent.replace(/\0/g, ''),
+        contentUrl: docs[i].metadata.url,
+        company_id: company_id,
+        group_id: uuid,
+        slug: `${slug}_${i}`,
+      });
+    }
+
+    const createdSources = await this.entity.addMany(sources);
+    return createdSources;
   }
 }

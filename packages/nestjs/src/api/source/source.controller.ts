@@ -11,6 +11,7 @@ import { PDFLoader } from 'langchain/document_loaders/fs/pdf';
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
 import { Document } from 'langchain/dist/document';
 import { LatexTextSplitter } from 'langchain/text_splitter';
+import { ScraperService } from './scraper.service';
 
 @Crud({
   model: {
@@ -29,7 +30,7 @@ import { LatexTextSplitter } from 'langchain/text_splitter';
 })
 @Controller('source')
 export class SourceController {
-  constructor(public service: SourceEntityService, private logic: SourceService) {}
+  constructor(public service: SourceEntityService, private logic: SourceService, private scraperService: ScraperService) {}
 
   @Post(':company_id/create-from-pdf')
   @UseInterceptors(FileInterceptor('file'))
@@ -48,7 +49,12 @@ export class SourceController {
   }
 
   @Get(':company_id/lookup')
-  async lookupSource(@Param('company_id') company_id: string, @Query('q') query: string) {
+  async lookupSource(
+    @Param('company_id') company_id: string,
+    @Query('q') query: string,
+    @Query('closest_neighbors') closest_neighbors = '10',
+    @Query('closeness') closeness = '0.2',
+  ) {
     if (!query) {
       throw new BadRequestException('Query parameter q is required.');
     }
@@ -56,11 +62,17 @@ export class SourceController {
     const embeddings = new OpenAIEmbeddings({ openAIApiKey: process.env['OPEN_AI_KEY'] });
     const embeddedQuery = await embeddings.embedQuery(query);
     const embeddString = `[${embeddedQuery.join(',')}]`;
-    return this.service.findClosestEmbeddings(company_id, embeddString);
+    return this.service.findClosestEmbeddings(company_id, embeddString, closeness, closest_neighbors);
   }
 
   @Get(':company_id/query')
-  async querySource(@Param('company_id') company_id: string, @Query('q') query: string) {
+  async querySource(
+    @Param('company_id') company_id: string,
+    @Query('q') query: string,
+    @Query('temperature') temperature = '0.8',
+    @Query('closest_neighbors') closest_neighbors = '10',
+    @Query('closeness') closeness = '0.2',
+  ) {
     if (!query) {
       throw new BadRequestException('Query parameter q is required.');
     }
@@ -68,10 +80,18 @@ export class SourceController {
     const embeddings = new OpenAIEmbeddings({ openAIApiKey: process.env['OPEN_AI_KEY'] });
     const embeddedQuery = await embeddings.embedQuery(query);
     const embeddString = `[${embeddedQuery.join(',')}]`;
-    const results = this.service.findClosestEmbeddings(company_id, embeddString);
+    const results = this.service.findClosestEmbeddings(company_id, embeddString, closeness, closest_neighbors);
     return this.logic.summarizeSearch(
       query,
-      (await results).map((res) => res.content),
+      (await results).map((res) => `${res.content} (${res.contentUrl})`),
+      temperature,
     );
+  }
+
+  @Post(':company_id/scrape')
+  async scrapeWebsite(@Param('company_id') company_id: string, @Body() body): Promise<Source[]> {
+    const { url } = body;
+    const docs: Document[] = await this.scraperService.scrapeWebsite(url);
+    return await this.logic.addWebSources(docs, company_id);
   }
 }

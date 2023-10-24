@@ -1,5 +1,5 @@
 import { Entity, Column, Repository, ManyToMany, JoinTable, ManyToOne, JoinColumn, OneToMany, OrderByCondition } from 'typeorm';
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Base } from './base.entity';
 import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
@@ -53,14 +53,16 @@ export class SourceEntityService extends TypeOrmCrudService<Source> {
     return this.repo.save(partial);
   }
 
-  async findClosestEmbeddings(company_id: string, embedding_array: string): Promise<Source[]> {
+  async findClosestEmbeddings(company_id: string, embedding_array: string, threshold: string, limit: string): Promise<Source[]> {
     return this.repo
       .createQueryBuilder('source')
       .select(['source.content', 'source.contentUrl', 'source.created_at'])
+      .addSelect('source.embeddings <=> :embedding_array', 'distance') // Calculate distance
       .where('source.company_id = :company_id', { company_id })
-      .orderBy('source.embeddings <=> :embedding_array') // If TypeORM doesn't support the <=> operator, this might fail.
-      .setParameters({ embedding_array })
-      .limit(3)
+      .andWhere('source.embeddings <=> :embedding_array < :threshold') // Filter by threshold
+      .orderBy('distance', 'ASC') // Order by calculated distance
+      .setParameters({ embedding_array, threshold: parseFloat(threshold) })
+      .limit(parseInt(limit))
       .getMany();
   }
 }

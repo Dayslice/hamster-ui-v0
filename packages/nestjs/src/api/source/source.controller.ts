@@ -69,7 +69,7 @@ export class SourceController {
   async querySource(
     @Param('company_id') company_id: string,
     @Query('q') query: string,
-    @Query('temperature') temperature = '0.8',
+    @Query('temperature') temperature = '0.0',
     @Query('closest_neighbors') closest_neighbors = '10',
     @Query('closeness') closeness = '0.2',
   ) {

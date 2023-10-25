@@ -1,4 +1,4 @@
-import { Entity, Column, Repository, ManyToMany, JoinTable, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
+import { Entity, Column, Repository, ManyToMany, JoinTable, ManyToOne, JoinColumn, OneToMany, DeleteDateColumn } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Base } from './base.entity';
@@ -9,6 +9,12 @@ import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
 
 @Entity()
 export class Run extends Base {
+  @DeleteDateColumn({ name: 'deleted_at' })
+  deleted_at: Date;
+
+  @Column({ default: null, nullable: true })
+  cancelled_at: Date;
+
   @Column()
   workflow_id: string;
 
@@ -26,8 +32,14 @@ export class Run extends Base {
   @Column()
   version: number;
 
-  @Column({ default: 'done' })
-  status: 'running' | 'failed' | 'cancelled' | 'done';
+  @Column({ default: '' })
+  initial_input: string;
+
+  @Column({ type: 'jsonb', nullable: true })
+  output: Record<string, any>;
+
+  @Column({ default: 'queued' })
+  status: 'queued' | 'running' | 'failed' | 'cancelled' | 'done';
 
   @OneToMany(() => Log, (log) => log.run)
   logs: Log[];

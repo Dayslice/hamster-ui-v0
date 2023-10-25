@@ -1,4 +1,4 @@
-import { Entity, Column, Repository, ManyToMany, JoinTable, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
+import { Entity, Column, Repository, ManyToMany, JoinTable, ManyToOne, JoinColumn, OneToMany, DeleteDateColumn } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Base } from './base.entity';
@@ -9,6 +9,9 @@ import { StepTool } from './step_tool.entity';
 
 @Entity()
 export class Step extends Base {
+  @DeleteDateColumn({ name: 'deleted_at' })
+  deleted_at: Date;
+
   @Column()
   label: string;
 

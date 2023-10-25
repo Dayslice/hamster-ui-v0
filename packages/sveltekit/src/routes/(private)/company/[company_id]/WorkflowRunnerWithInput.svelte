@@ -30,12 +30,13 @@
     if (selectedWorkflowId) {
       formDisabled = true;
       try {
-        workflowService.run(selectedWorkflowId, companyId, initialInput);
+        const run: Run = await workflowService.run(selectedWorkflowId, companyId, initialInput);
+        await goto(`/runs/${run.id}`);
       } catch (error) {
+        formDisabled = false;
         console.error('Error running workflow:', error);
         alert('Failed to start the workflow.');
       }
-      setTimeout(() => (formDisabled = false), 2000);
     }
   }
 </script>

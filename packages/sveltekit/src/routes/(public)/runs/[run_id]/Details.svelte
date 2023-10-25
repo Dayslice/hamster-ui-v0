@@ -1,6 +1,7 @@
 <script lang="ts">
   import Panel from '$lib/layout/Panel.svelte';
   import Status from '$lib/ui/Status.svelte';
+  import runService from '$lib/utils/api/runService';
   import { formatCasualDateTime, formatDuration } from '$lib/utils/formatters/date.formatter';
 
   export let workflow: any;
@@ -9,6 +10,10 @@
   export { classList as class };
 
   let showFullInput: boolean = false;
+
+  const handleCancelRun = async () => {
+    run = await runService.cancelOne(run.id);
+  };
 </script>
 
 <Panel class={classList}>
@@ -18,6 +23,9 @@
       <span class="font-medium text-xl"><span class="text-slate-800">{workflow ? workflow.label : ''}</span></span>
 
       <Status status={run.status} />
+      {#if run.status == 'running'}
+        <button type="button" on:click={handleCancelRun}><i class="fa-solid fa-ban text-red-400 text-sm" /></button>
+      {/if}
     </div>
     <div class="flex flex-col gap-1 items-start lg:flex-row lg:items-center lg:gap-4 text-sm text-slate-400">
       <div class="flex flex-row gap-1 items-center">

@@ -30,6 +30,18 @@ async function deleteOne(id: string): Promise<boolean> {
   return hardDelete<Run>(`run/${id}`);
 }
 
+async function cancelOne(run_id: string): Promise<Run> {
+  const engine_url = import.meta.env.DEV ? 'http://localhost:8000' : 'https://hiveai-engine-4ae52c8098bb.herokuapp.com';
+  const res = await fetch(`${engine_url}/run/${run_id}/cancel`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      // add other headers as needed
+    },
+  });
+  return res.json();
+}
+
 export default {
   getOne,
   getMany,
@@ -37,4 +49,5 @@ export default {
   update,
   getManyForCompany,
   deleteOne,
+  cancelOne,
 };

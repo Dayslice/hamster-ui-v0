@@ -35,6 +35,9 @@ export class Run extends Base {
   @Column({ default: '' })
   initial_input: string;
 
+  @Column({ default: '' })
+  notes: string;
+
   @Column({ type: 'jsonb', nullable: true })
   output: Record<string, any>;
 

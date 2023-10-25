@@ -19,7 +19,10 @@ export class Attachment extends Base {
   @Column()
   log_id: number;
 
-  @ManyToOne(() => Log)
+  @ManyToOne(() => Log, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   @JoinColumn({ name: 'log_id' })
   log: Log;
 }

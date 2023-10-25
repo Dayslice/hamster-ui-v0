@@ -9,8 +9,6 @@ async function get<T = any>(path: string): Promise<T> {
   return response.json();
 }
 
-// ... other imports ...
-
 async function post<T = any>(path: string, data: any): Promise<T> {
   const url = import.meta.env.DEV ? 'http://localhost:3001' : 'https://hiveai-demo-da68357eec9a.herokuapp.com';
   const response = await fetch(`${url}/${path}`, {
@@ -27,6 +25,19 @@ async function post<T = any>(path: string, data: any): Promise<T> {
   }
 
   return response.json();
+}
+
+async function hardDelete<T = any>(path: string): Promise<boolean> {
+  const url = import.meta.env.DEV ? 'http://localhost:3001' : 'https://hiveai-demo-da68357eec9a.herokuapp.com';
+  const response = await fetch(`${url}/${path}`, {
+    method: 'DELETE',
+  });
+
+  if (response.status != 200) {
+    throw new Error(`HTTP error! Status: ${response.status}`);
+  }
+
+  return true;
 }
 
 async function patch<T = any>(path: string, data: any): Promise<T> {
@@ -49,4 +60,4 @@ async function patch<T = any>(path: string, data: any): Promise<T> {
 
 // ... other functions ...
 
-export { get, post, patch };
+export { get, post, patch, hardDelete };

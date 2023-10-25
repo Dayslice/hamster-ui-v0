@@ -31,7 +31,7 @@ import { Run, RunEntityService } from 'src/entities/run.entity';
     ],
   },
   routes: {
-    only: ['getOneBase', 'getManyBase', 'updateOneBase', 'createOneBase'],
+    only: ['getOneBase', 'getManyBase', 'updateOneBase', 'createOneBase', 'deleteOneBase'],
   },
 })
 @Controller('run')

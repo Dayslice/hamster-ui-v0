@@ -1,5 +1,5 @@
 import type { Run } from '$entities/run.entity';
-import { get, post, patch } from './base';
+import { get, post, patch, hardDelete } from './base';
 async function getOne(id: string, queryParams: Record<string, string> | string[][] = {}): Promise<Run> {
   const params: URLSearchParams = new URLSearchParams(queryParams);
   return get<Run>(`run/${id}?${params.toString()}`);
@@ -26,10 +26,15 @@ async function update(id: string, data: Partial<Run>): Promise<Run> {
   return patch<Run>(`run/${id}`, data);
 }
 
+async function deleteOne(id: string): Promise<boolean> {
+  return hardDelete<Run>(`run/${id}`);
+}
+
 export default {
   getOne,
   getMany,
   create,
   update,
   getManyForCompany,
+  deleteOne,
 };

@@ -6,12 +6,15 @@
   class:text-emerald-600={status == 'done'}
   class:bg-emerald-100={status == 'done'}
   class:border-emerald-300={status == 'done'}
-  class:bg-yellow-100={status == 'running'}
-  class:text-yellow-600={status == 'running'}
-  class:border-yellow-300={status == 'running'}
+  class:bg-indigo-100={status == 'running'}
+  class:text-indigo-600={status == 'running'}
+  class:border-indigo-300={status == 'running'}
   class:bg-red-100={status == 'error'}
   class:text-red-600={status == 'error'}
   class:border-red-300={status == 'error'}
+  class:bg-yellow-100={status == 'queued'}
+  class:text-yellow-600={status == 'queued'}
+  class:border-yellow-300={status == 'queued'}
   class:bg-slate-100={status == 'cancelled'}
   class:text-slate-600={status == 'cancelled'}
   class:border-slate-300={status == 'cancelled'}

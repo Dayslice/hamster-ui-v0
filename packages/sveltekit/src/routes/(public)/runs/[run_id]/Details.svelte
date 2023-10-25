@@ -32,6 +32,16 @@
       </div>
     </div>
 
-    <div class="mt-2 pt-2 border-t border-slate-100 f text-sm text-slate-800">{workflow.task}</div>
+    <div class="mt-2 pt-2 border-t border-slate-100 f text-sm text-slate-800">
+      <span class="font-semibold text-sm">Task:</span>
+      {workflow.task}
+    </div>
+    {#if run.initial_input}
+      <div class="flex-row items-start gap-6 text-sm">
+        <span class="font-semibold text-sm">Input: </span>
+        {run.initial_input}
+        {run.initial_input.substring(0, 140)}{run.initial_input.length > 140 ? '...' : ''}
+      </div>
+    {/if}
   </div>
 </Panel>

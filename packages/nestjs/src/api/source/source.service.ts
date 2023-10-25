@@ -103,9 +103,9 @@ export class SourceService {
     // We can construct an LLMChain from a PromptTemplate and an LLM.
     const model = new OpenAI({ temperature: parseFloat(temperature), openAIApiKey: process.env['OPEN_AI_KEY'], maxTokens: -1 });
     const prompt = PromptTemplate.fromTemplate(
-      `Based ONLY on the following SOURCES of information, summarize an answer to the QUERY. Include a list of REFERENCES using the URL of the pages you used for reference. SOURCES: ${content.join(
+      `Based ONLY on the following SOURCES of information, summarize an answer to the QUERY. Use multiple paragraphs when needed. Longer, detailed responses are preferred. Use as much direct quotes and references to the SOURCES as possible.  Include a list of REFERENCES using the URL of the pages you used for reference. SOURCES: ${content.join(
         '\n\n',
-      )}.  Query: {query}?`,
+      )}.  QUERY: {query}`,
     );
     const chainA = new LLMChain({ llm: model, prompt });
     const res = await chainA.call({ query });

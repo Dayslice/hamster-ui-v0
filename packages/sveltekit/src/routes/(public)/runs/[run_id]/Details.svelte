@@ -7,6 +7,8 @@
   export let run: any;
   let classList = '';
   export { classList as class };
+
+  let showFullInput: boolean = false;
 </script>
 
 <Panel class={classList}>
@@ -41,7 +43,14 @@
     {#if run.initial_input}
       <div class="mt-2 pt-2 border-t border-slate-100 f text-sm text-slate-800">
         <span class="font-semibold text-sm">Input: </span>
-        {run.initial_input.substring(0, 140)}{run.initial_input.length > 140 ? '...' : ''}
+        {#if run.initial_input.length < 140}
+          {run.initial_input}
+        {:else}
+          {showFullInput ? run.initial_input : `${run.initial_input.substring(0, 140)}...`}
+          <br /><button on:click={() => (showFullInput = !showFullInput)} class="underline text-blue-600 text-sm"
+            >{showFullInput ? 'hide' : 'show'} full input</button
+          >
+        {/if}
       </div>
     {/if}
   </div>

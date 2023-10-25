@@ -14,6 +14,7 @@
   import WorkflowRunnerWithInput from './WorkflowRunnerWithInput.svelte';
   import Panel from '$lib/layout/Panel.svelte';
   import runService from '$lib/utils/api/runService';
+  import CompanyOverview from '../../../(public)/runs/[run_id]/CompanyOverview.svelte';
   let company_id: string = $page.params.company_id;
   let company: any;
   let workflows: Workflow[] = [];
@@ -60,7 +61,12 @@
       {/each}
     </tbody>
   </table>
-  <Panel class="w-full max-w-md">
-    <WorkflowRunnerWithInput companyId={company_id} />
-  </Panel>
+  <div class="w-full max-w-md flex flex-col gap-3">
+    {#if company}
+      <CompanyOverview {company} />
+    {/if}
+    <Panel class="">
+      <WorkflowRunnerWithInput companyId={company_id} />
+    </Panel>
+  </div>
 </div>

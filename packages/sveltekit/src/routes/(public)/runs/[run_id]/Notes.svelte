@@ -51,7 +51,7 @@
     <div
       role="button"
       tabindex="0"
-      class="text-slate-700 cursor-pointer"
+      class="text-slate-700 cursor-pointer whitespace-break-spaces"
       aria-roledescription="edit button"
       aria-label="Edit the notes of the run"
       on:keydown={handleViewingKeyDown}

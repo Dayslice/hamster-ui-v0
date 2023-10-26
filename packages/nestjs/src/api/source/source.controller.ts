@@ -80,10 +80,14 @@ export class SourceController {
     const embeddings = new OpenAIEmbeddings({ openAIApiKey: process.env['OPEN_AI_KEY'] });
     const embeddedQuery = await embeddings.embedQuery(query);
     const embeddString = `[${embeddedQuery.join(',')}]`;
-    const results = this.service.findClosestEmbeddings(company_id, embeddString, closeness, closest_neighbors);
+    const results = await this.service.findClosestEmbeddings(company_id, embeddString, closeness, closest_neighbors);
+    if (results.length == 0) {
+      return 'No results found.';
+    }
+
     return this.logic.summarizeSearch(
       query,
-      (await results).map((res) => `${res.content} (${res.contentUrl})`),
+      results.map((res) => `${res.content} (${res.contentUrl})`),
       temperature,
     );
   }

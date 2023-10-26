@@ -31,9 +31,17 @@
   let logs: Log[] = [];
   let steps: Step[];
   let interval_id: number | NodeJS.Timer;
+  let quick_interval_id: number | NodeJS.Timer;
 
   onMount(async () => {
     await fetchData();
+    quick_interval_id = setInterval(async () => {
+      if (logs.length == 0 || run.status == 'queued') {
+        await fetchData();
+      } else {
+        clearInterval(quick_interval_id); // stop the interval if the status isn't 'running'
+      }
+    }, 2000);
 
     interval_id = setInterval(async () => {
       if (run && run.status === 'running') {
@@ -46,6 +54,7 @@
 
   onDestroy(() => {
     if (interval_id) clearInterval(interval_id);
+    if (quick_interval_id) clearInterval(quick_interval_id);
   });
 
   async function fetchData() {

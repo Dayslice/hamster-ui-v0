@@ -27,6 +27,7 @@ const prodConfig = {
 let connectionOptions: PostgresConnectionOptions = {
   type: 'postgres',
   entities: ['**/*.entity.js'],
+  subscribers: [__dirname + '/**/*.subscriber{.ts,.js}'],
   synchronize: false,
   migrationsTableName: 'migration',
   migrations: ['dist/db/migrations/*.js'],

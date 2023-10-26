@@ -36,7 +36,13 @@ export class Run extends Base {
   initial_input: string;
 
   @Column({ default: '' })
+  label: string;
+
+  @Column({ default: '' })
   notes: string;
+
+  @Column({ default: null, nullable: true })
+  rating: 1 | 2 | 3 | 4 | 5 | null;
 
   @Column({ type: 'jsonb', nullable: true })
   output: Record<string, any>;

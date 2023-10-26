@@ -12,6 +12,8 @@ import { Tool, ToolEntityService } from './tool.entity';
 import { Workflow, WorkflowEntityService } from './workflow.entity';
 import { StepTool, StepToolEntityService } from './step_tool.entity';
 import { Source, SourceEntityService } from './source.entity';
+import { RunCancelledSubscriber } from './run.cancelled.subscriber';
+import { RunLabelSubscriber } from './run.label.subscriber';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Agent, Attachment, Company, Log, Run, Source, Step, StepTool, Style, Tool, User, Workflow])],
@@ -21,6 +23,8 @@ import { Source, SourceEntityService } from './source.entity';
     CompanyEntityService,
     LogEntityService,
     RunEntityService,
+    RunCancelledSubscriber,
+    RunLabelSubscriber,
     SourceEntityService,
     StepEntityService,
     StepToolEntityService,

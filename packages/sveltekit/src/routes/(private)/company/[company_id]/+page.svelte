@@ -38,7 +38,7 @@
   <table class="flex-1 divide-y divide-gray-300 w-full bg-white">
     <thead>
       <tr>
-        <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500 sm:pl-0">Run ID</th>
+        <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500 sm:pl-0">Run</th>
         <th scope="col" class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500">Workflow</th>
         <th scope="col" class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500">Started At</th>
         <th scope="col" class="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500">Status</th>
@@ -48,7 +48,9 @@
     <tbody class="divide-y divide-gray-200 bg-white">
       {#each runs as run, idx}
         <tr class="cursor-pointer hover:bg-amber-200">
-          <td class="py-4 px-3 text-sm font-medium text-gray-900 sm:pl-0" on:click={() => goto(`/runs/${run.id}`)}>{run.id.slice(-4)}</td>
+          <td class="py-4 px-3 text-sm font-medium text-gray-900 sm:pl-0" on:click={() => goto(`/runs/${run.id}`)}
+            >{run.label || `${run.id.slice(-4)}  ${run.workflow.label}`}</td
+          >
           <td class="px-3 py-4 text-sm text-gray-500" on:click={() => goto(`/runs/${run.id}`)}>{run.workflow.label}</td>
           <td class="px-3 py-4 text-sm text-gray-500" on:click={() => goto(`/runs/${run.id}`)}>{formatCasualDateTime(run.created_at)}</td>
           <td class="relative py-4 pl-3 pr-4 text-left text-sm font-medium sm:pr-0"><Status status={run.status} /> </td>

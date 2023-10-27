@@ -83,7 +83,7 @@
 {#if run && workflow && logs && steps}
   <main class="gap-4 p-4 flex flex-col md:grid md:grid-cols-3 lg:grid-cols-4 mb-20">
     <div class="row-start-1 row-end-3 col-span-1 flex flex-col gap-4">
-      <Details {workflow} bind:run />
+      <Details {workflow} bind:run lastLog={logs.length > 0 ? logs[logs.length - 1] : null} />
       <StepsOverview {steps} {logs} runStatus={run.status} />
     </div>
 

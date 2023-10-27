@@ -7,9 +7,12 @@
   import Label from './Label.svelte';
   import type { Workflow } from '$entities/workflow.entity';
   import type { Run } from '$entities/run.entity';
+  import type { Log } from '$entities/log.entity';
 
   export let workflow: Workflow;
   export let run: Run;
+  export let lastLog: Log | null;
+
   let classList = '';
   export { classList as class };
 
@@ -40,7 +43,7 @@
       </div>
       <div class="flex flex-row gap-1 items-center">
         <i class="fa-solid fa-clock text-xs" />
-        {formatDuration(run.created_at, run.updated_at)}
+        {formatDuration(run.created_at, lastLog ? lastLog.created_at : run.created_at)}
       </div>
     </div>
 

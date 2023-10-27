@@ -22,17 +22,26 @@
       </div>
     {/if}
     {#each logs as log}
-      <div class="flex items-start mb-4 space-x-4">
+      <div class="flex items-start mb-4 space-x-4 relative group">
         <img src={log.source_agent?.avatar_url || ''} alt={log.source_agent?.name || ''} class="w-10 h-10 rounded-full" />
         <div class="text-sm">
-          <div class="text-gray-500 mb-1">
-            {log.source_agent?.name || 'System'} •
-            <span class="text-slate-400 text-xs"
-              >{formatCasualDateTime(log.created_at)}
-              {#if log.step}
-                • <span class="text-slate-400 text-xs">{log.step.label}</span>
-              {/if}
-            </span>
+          <div class="flex flex-row justify-between">
+            <div class="text-gray-500 mb-1">
+              {log.source_agent?.name || 'System'} •
+              <span class="text-slate-400 text-xs"
+                >{formatCasualDateTime(log.created_at)}
+                {#if log.step}
+                  • <span class="text-slate-400 text-xs">{log.step.label}</span>
+                {/if}
+              </span>
+            </div>
+            <button
+              type="button"
+              class=" text-slate-400 text-xxs w-4 h-4 hidden group-hover:block"
+              on:click={() => navigator.clipboard.writeText(log.content)}
+            >
+              <i class="fa-regular fa-clipboard" />
+            </button>
           </div>
           <div class="bg-gray-100 p-2 rounded-lg text-sm leading-relaxed whitespace-pre-wrap markdown-body">
             <SvelteMarkdown source={log.content} />

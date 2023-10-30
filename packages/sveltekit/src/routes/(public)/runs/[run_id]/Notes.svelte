@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Run } from '$entities/run.entity';
   import runService from '$lib/utils/api/runService';
+  import SvelteMarkdown from 'svelte-markdown';
 
   export let run: Run; // To uniquely identify which run's notes you're editing
   export let initialNotes: string = '';
@@ -36,8 +37,7 @@
   };
 
   const handleEditingKeyDown = (e: KeyboardEvent) => {
-    if (e.shiftKey && e.key === 'Enter') {
-      e.stopImmediatePropagation();
+    if (e.key === 'Enter' && !e.shiftKey && !e.ctrlKey) {
       e.preventDefault();
       saveNotes();
     }
@@ -51,13 +51,13 @@
     <div
       role="button"
       tabindex="0"
-      class="text-slate-700 cursor-pointer whitespace-break-spaces"
+      class="text-slate-700 cursor-pointer whitespace-break-spaces markdown-body text-sm leading-relaxed"
       aria-roledescription="edit button"
       aria-label="Edit the notes of the run"
       on:keydown={handleViewingKeyDown}
       on:click={() => (notesState = NotesStates.EDITING)}
     >
-      {notes && notes != '' ? notes : 'Click to add notes'}
+      <SvelteMarkdown source={notes && notes != '' ? notes : 'Click to add notes'} />
     </div>
   {:else if notesState === NotesStates.EDITING}
     <textarea

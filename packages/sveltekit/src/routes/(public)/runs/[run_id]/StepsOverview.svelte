@@ -1,5 +1,4 @@
 <script lang="ts">
-  import type { Attachment } from '$entities/attachment.entity';
   import type { Log } from '$entities/log.entity';
   import type { Step } from '$entities/step.entity';
   import Panel from '$lib/layout/Panel.svelte';
@@ -10,7 +9,6 @@
   let classList = '';
   export { classList as class };
 
-  // Example steps data. This would be fetched or passed as props.
   export let steps: any[] = [];
   export let logs: Log[] = [];
   export let runStatus: string;

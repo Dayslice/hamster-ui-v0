@@ -66,6 +66,15 @@
       on:keydown={handleEditingKeyDown}
       bind:value={notes}
       on:blur={saveNotes}
+      rows="10"
     />
+    <span class="text-xxs slate-500"
+      >Markdown is supported. <span class="bg-slate-50 text-slate-800 px-1 font-semibold leading-tight">**bold**</span>
+      <span class="bg-slate-50 text-slate-800 px-1 italic leading-tight">*italic*</span>
+      <span class="bg-slate-50 text-slate-800 px-1 italic leading-tight">[link](url)</span><br />
+      <span class="bg-slate-50 text-slate-800 px-1 font-semibold leading-tight"> Shift + Enter </span>
+      for new line.
+      <span class="bg-slate-50 text-slate-800 px-1 font-semibold leading-tight">Enter</span> to save.</span
+    >
   {/if}
 </div>

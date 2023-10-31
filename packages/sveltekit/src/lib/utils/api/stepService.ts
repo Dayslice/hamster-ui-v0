@@ -13,7 +13,11 @@ async function getManyForWorkflow(workflow_id: string): Promise<Step[]> {
     `step?filter=workflow_id||$eq||${workflow_id}&join=step_tools&join=primary_agent&join=other_agents&join=step_tools.attachments`,
   );
 }
-
+async function getManyForUI(workflow_id: string): Promise<Step[]> {
+  return get<Step[]>(
+    `step?filter=workflow_id||$eq||${workflow_id}&join=step_tools&join=primary_agent&join=other_agents&join=step_tools.attachments&join=step_tools.tool&join=step_tools.step_tool_inputs`,
+  );
+}
 async function create(data: Partial<Step>): Promise<Step> {
   return post<Step>('step', data);
 }
@@ -26,6 +30,7 @@ export default {
   getOne,
   getMany,
   getManyForWorkflow,
+  getManyForUI,
   create,
   update,
 };

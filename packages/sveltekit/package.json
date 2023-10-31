@@ -36,8 +36,10 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@xyflow/svelte": "^0.0.24",
 		"dotenv": "^16.3.1",
 		"luxon": "^3.4.3",
-		"svelte-jsoneditor": "^0.18.8"
+		"svelte-jsoneditor": "^0.18.8",
+		"svelvet": "^8.1.0"
 	}
 }

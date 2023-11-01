@@ -54,6 +54,13 @@
     markdown: {
       model_structure: {},
     },
+    research: {
+      agent_instructions: '',
+      research_prefix:
+        'Create easy-to-reference research notes, comprised mostly of quotes, direct snippets, and key ideas in a bulleted list. Each bullet should be useful, meaningful and contain enough context to be used to write a blog later. 10-15 bullets is good.',
+      research_external: true,
+      research_internal: true,
+    },
   };
   let newStepTool: Partial<StepTool>;
   const initializeStepTool = (): Partial<StepTool> => {

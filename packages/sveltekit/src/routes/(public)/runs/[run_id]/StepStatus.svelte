@@ -21,7 +21,7 @@
     const stepLog = logs.find((log) => log.step_id === step.id);
 
     if (!stepLog) {
-      return _runStatus == 'cancelled' ? StepStatus.CANCELLED : StepStatus.IN_PROGRESS;
+      return _runStatus == 'cancelled' ? StepStatus.CANCELLED : StepStatus.NOT_STARTED;
     }
 
     if (lastLog.step_id === step.id) {

@@ -36,6 +36,13 @@ export class Source extends Base {
   @JoinColumn({ name: 'company_id' }) // This creates a foreign key column named 'company_id'
   company: Company;
 }
+
+export interface SourceFilterOptions {
+  contentUrl?: string;
+  slug?: string;
+  groupId?: string;
+}
+
 @Injectable()
 export class SourceEntityService extends TypeOrmCrudService<Source> {
   constructor(
@@ -53,16 +60,39 @@ export class SourceEntityService extends TypeOrmCrudService<Source> {
     return this.repo.save(partial);
   }
 
-  async findClosestEmbeddings(company_id: string, embedding_array: string, threshold: string, limit: string): Promise<Source[]> {
-    return this.repo
-      .createQueryBuilder('source')
-      .select(['source.content', 'source.contentUrl', 'source.created_at'])
+  async findClosestEmbeddings(
+    company_id: string,
+    embedding_array: string,
+    threshold: string,
+    limit: string,
+    filters: SourceFilterOptions = {},
+  ): Promise<Source[]> {
+    const query_builder = this.repo.createQueryBuilder('source');
+
+    // Start building the query
+    query_builder
+      .select(['source.content', 'source.contentUrl', 'source.slug', 'source.group_id', 'source.created_at'])
       .addSelect('source.embeddings <=> :embedding_array', 'distance') // Calculate distance
       .where('source.company_id = :company_id', { company_id })
-      .andWhere('source.embeddings <=> :embedding_array < :threshold') // Filter by threshold
-      .orderBy('distance', 'ASC') // Order by calculated distance
-      .setParameters({ embedding_array, threshold: parseFloat(threshold) })
-      .limit(parseInt(limit))
-      .getMany();
+      .andWhere('source.embeddings <=> :embedding_array < :threshold', { embedding_array, threshold: parseFloat(threshold) }) // Filter by threshold
+      .orderBy('distance', 'ASC'); // Order by calculated distance
+
+    // Apply the filters based on the properties set in the filters object
+    if (filters.contentUrl) {
+      const urls = filters.contentUrl.split(',').map((url) => url.trim());
+      query_builder.andWhere('source.contentUrl IN (:...urls)', { urls });
+    }
+
+    if (filters.slug) {
+      const slugs = filters.slug.split(',').map((slug) => slug.trim());
+      query_builder.andWhere('source.slug IN (:...slugs)', { slugs });
+    }
+
+    if (filters.groupId) {
+      const groupIds = filters.groupId.split(',').map((id) => id.trim());
+      query_builder.andWhere('source.group_id IN (:...groupIds)', { groupIds });
+    }
+
+    return query_builder.limit(parseInt(limit)).getMany();
   }
 }
